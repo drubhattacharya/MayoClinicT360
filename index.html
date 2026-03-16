@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Aqueduct T360 MATCH — Mayo Clinic NEMT Investment Analysis</title>
-
-  <!-- Dependencies (CDN) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-
-  <style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Aqueduct T360 MATCH — Mayo Clinic NEMT Investment Demo</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
 /* CHNA–CRA Compliance Navigator — Executive-grade theme */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
@@ -714,899 +711,225 @@ input[type="file"]:hover{
 .mayo-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.10); }
 
 
-/* ═══ Mayo White-Glove Demo CSS ══════════════════════════════════════════ */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+/* ═══ Mayo White-Glove Demo ═══════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap');
 
-:root {
-  --mayo-navy:  #003F87;
-  --mayo-dark:  #001F4D;
-  --mayo-gold:  #C9A227;
-  --mayo-gold2: #E8C84A;
-  --mayo-cream: #FDF8EE;
-  --wg-radius:  14px;
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: #F0F4F8; margin: 0; padding: 0;
 }
 
-/* Hero masthead redesign */
-.wg-hero {
-  background: linear-gradient(135deg, var(--mayo-dark) 0%, var(--mayo-navy) 60%, #0A3060 100%);
-  border-radius: var(--wg-radius) var(--wg-radius) 0 0;
-  padding: 32px 36px 0;
-  position: relative;
-  overflow: hidden;
+/* ── Hero masthead ── */
+.demo-hero {
+  background: linear-gradient(140deg, #001533 0%, #003F87 55%, #0A3566 100%);
+  padding: 32px 40px 0; position: relative; overflow: hidden;
 }
-.wg-hero::before {
-  content: '';
-  position: absolute;
-  top: -80px; right: -80px;
-  width: 320px; height: 320px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,162,39,.18) 0%, transparent 70%);
+.demo-hero::before {
+  content: ''; position: absolute;
+  top: -100px; right: -60px; width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,162,39,.2) 0%, transparent 65%);
   pointer-events: none;
 }
-.wg-hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201,162,39,.4), transparent);
+.demo-hero-inner {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto;
+  position: relative;
 }
-.wg-eyebrow {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .16em;
-  color: rgba(201,162,39,.75); margin-bottom: 10px;
+.demo-hero-text { flex: 1; min-width: 260px; padding-bottom: 20px; }
+.demo-eyebrow {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .18em; color: rgba(201,162,39,.8); margin-bottom: 10px;
 }
-.wg-headline {
+.demo-headline {
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: clamp(22px, 2.6vw, 32px);
-  font-weight: 400; font-style: italic;
-  color: #fff; margin: 0 0 6px; line-height: 1.2;
+  font-size: clamp(22px, 3vw, 34px); font-weight: 400; font-style: italic;
+  color: #fff; margin: 0 0 8px; line-height: 1.18;
 }
-.wg-headline strong {
-  font-style: normal; font-weight: 400;
-  background: linear-gradient(135deg, var(--mayo-gold), var(--mayo-gold2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+.demo-headline strong {
+  font-style: normal;
+  background: linear-gradient(120deg, #C9A227 0%, #E8C84A 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.wg-sub {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px; color: rgba(255,255,255,.55);
-  line-height: 1.65; max-width: 580px; margin: 0 0 24px;
+.demo-sub {
+  font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.65;
+  max-width: 520px; margin: 0;
 }
+.demo-kpi-strip {
+  display: flex; gap: 20px; flex-wrap: wrap; align-items: center;
+  padding: 12px 0 20px;
+}
+.demo-kpi {
+  text-align: center;
+  border-left: 1px solid rgba(255,255,255,.1); padding-left: 20px;
+}
+.demo-kpi:first-child { border-left: none; padding-left: 0; }
+.demo-kpi-val {
+  font-size: 22px; font-weight: 800; font-family: monospace;
+  background: linear-gradient(135deg,#C9A227,#E8C84A);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1;
+}
+.demo-kpi-lbl { font-size: 10px; color: rgba(255,255,255,.45); margin-top: 3px; }
 
-/* Step rail */
+/* ── Progress rail ── */
 .wg-rail {
-  display: flex; align-items: stretch;
-  gap: 0; overflow-x: auto;
-  scrollbar-width: none; padding-bottom: 0;
+  display: flex; align-items: stretch; background: rgba(0,0,0,.25);
+  border-top: 1px solid rgba(255,255,255,.08);
+  overflow-x: auto; scrollbar-width: none; max-width: 100%;
 }
 .wg-rail::-webkit-scrollbar { display: none; }
-.wg-step {
-  display: flex; align-items: center; gap: 10px;
-  padding: 14px 18px 16px;
-  cursor: pointer; position: relative;
-  flex-shrink: 0; transition: background .15s;
-  border-bottom: 3px solid transparent;
-  background: transparent;
-  border-radius: 0;
-  font-family: 'DM Sans', sans-serif;
+.wg-rail-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 18px 13px; background: none; border: none;
+  border-bottom: 3px solid transparent; cursor: pointer;
+  font-family: inherit; flex-shrink: 0; transition: background .15s;
+  position: relative;
 }
-.wg-step:hover { background: rgba(255,255,255,.05); }
-.wg-step.active {
-  border-bottom-color: var(--mayo-gold);
-  background: rgba(201,162,39,.08);
+.wg-rail-btn:hover { background: rgba(255,255,255,.06); }
+.wg-rail-btn.wg-active {
+  border-bottom-color: #C9A227;
+  background: rgba(201,162,39,.1);
 }
-.wg-step.done .wg-num { background: rgba(201,162,39,.25); color: var(--mayo-gold); }
-.wg-step.done .wg-num::after { content: '✓'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; }
-.wg-step.done .wg-num span { opacity: 0; }
-.wg-num {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: rgba(255,255,255,.1); color: rgba(255,255,255,.45);
-  font-size: 11px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; position: relative; transition: all .2s;
+.wg-rail-btn.wg-done .wg-rail-num {
+  background: rgba(201,162,39,.3); color: #C9A227;
 }
-.wg-step.active .wg-num {
-  background: var(--mayo-gold); color: var(--mayo-dark);
+.wg-rail-btn.wg-done .wg-rail-num::after {
+  content: '✓'; display: block;
 }
-.wg-step-label {
-  font-size: 11.5px; font-weight: 600;
-  color: rgba(255,255,255,.45); white-space: nowrap;
-  transition: color .15s;
+.wg-rail-btn.wg-done .wg-rail-num span { display: none; }
+.wg-rail-num {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,255,255,.1); color: rgba(255,255,255,.35);
+  font-size: 10px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; transition: all .2s;
 }
-.wg-step.active .wg-step-label { color: #fff; }
-.wg-step.done .wg-step-label { color: rgba(255,255,255,.6); }
-.wg-sep {
-  width: 28px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  padding-bottom: 3px;
+.wg-rail-btn.wg-active .wg-rail-num { background: #C9A227; color: #001533; }
+.wg-rail-lbl {
+  font-size: 11.5px; font-weight: 600; color: rgba(255,255,255,.35);
+  white-space: nowrap; transition: color .15s;
 }
-.wg-sep::after {
-  content: ''; display: block;
-  width: 100%; height: 1px;
-  background: rgba(255,255,255,.12);
-}
+.wg-rail-btn.wg-active .wg-rail-lbl { color: #fff; }
+.wg-rail-btn.wg-done .wg-rail-lbl { color: rgba(255,255,255,.55); }
 
-/* Panel content area */
-.wg-body { background: #fff; border-radius: 0 0 var(--wg-radius) var(--wg-radius); }
+/* ── Content area ── */
+.demo-body { max-width: 1100px; margin: 0 auto; padding: 28px 24px 60px; }
 
-/* Bridge footer */
-.wg-bridge {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 20px; flex-wrap: wrap;
-  margin-top: 28px; padding: 20px 24px;
-  background: var(--mayo-cream);
-  border-top: 1px solid rgba(0,63,135,.08);
-  border-radius: 0 0 var(--wg-radius) var(--wg-radius);
-}
-.wg-bridge-text {
-  flex: 1; min-width: 240px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px; color: #445;
-  line-height: 1.65;
-  padding-left: 14px;
-  border-left: 3px solid rgba(201,162,39,.5);
-  font-style: italic;
-}
-.wg-continue {
-  background: linear-gradient(135deg, var(--mayo-gold), #B8941F);
-  color: var(--mayo-dark); border: none; border-radius: 10px;
-  padding: 13px 26px; font-size: 14px; font-weight: 700;
-  cursor: pointer; font-family: 'DM Sans', sans-serif;
-  white-space: nowrap; flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(201,162,39,.3);
-  transition: transform .12s, box-shadow .12s;
-  letter-spacing: .01em;
-}
-.wg-continue:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(201,162,39,.4);
-}
-.wg-continue:active { transform: none; }
+/* ── Panel ── */
+.wg-panel { }
 
-/* Override flat subnav when in guided mode */
-.wg-active .mayo-subnav-row { display: none; }
-
-/* Section header badge */
-.wg-step-badge {
+/* ── Step badge ── */
+.wg-badge {
   display: inline-flex; align-items: center; gap: 8px;
-  background: linear-gradient(135deg, var(--mayo-dark), var(--mayo-navy));
-  color: var(--mayo-gold); border-radius: 8px;
-  padding: 5px 14px 5px 8px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px; font-weight: 800;
-  text-transform: uppercase; letter-spacing: .09em;
-  margin-bottom: 14px;
+  background: linear-gradient(135deg,#001533,#003F87);
+  border-radius: 8px; padding: 5px 14px 5px 6px;
+  margin-bottom: 16px;
 }
-.wg-step-badge-num {
-  width: 20px; height: 20px; border-radius: 50%;
-  background: var(--mayo-gold); color: var(--mayo-dark);
+.wg-badge-num {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  background: #C9A227; color: #001533;
   font-size: 11px; font-weight: 900;
   display: flex; align-items: center; justify-content: center;
 }
-
-/* Smooth panel reveal */
-#mpanel_chna, #mpanel_linkage, #mpanel_roi,
-#mpanel_cra, #mpanel_banks, #mpanel_draft {
-  animation: wg-panel-in .25s ease both;
-}
-@keyframes wg-panel-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: none; }
+.wg-badge-icon { font-size: 15px; }
+.wg-badge-label {
+  font-size: 11px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .09em; color: #C9A227;
 }
 
+/* ── Continue footer ── */
+.wg-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  margin-top: 28px; padding: 18px 22px;
+  background: #FDF8EE;
+  border: 1px solid rgba(201,162,39,.2);
+  border-radius: 10px;
+}
+.wg-footer-last { background: linear-gradient(135deg,rgba(0,21,51,.04),rgba(0,63,135,.06)); }
+.wg-bridge {
+  flex: 1; min-width: 200px; margin: 0;
+  font-size: 13px; color: #4a4a5a; line-height: 1.65;
+  padding-left: 14px; border-left: 3px solid rgba(201,162,39,.5);
+  font-style: italic;
+}
+.wg-btn {
+  background: linear-gradient(135deg, #C9A227, #B08010);
+  color: #001533; border: none; border-radius: 9px;
+  padding: 12px 26px; font-size: 14px; font-weight: 700;
+  cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  font-family: inherit; letter-spacing: .01em;
+  box-shadow: 0 3px 12px rgba(201,162,39,.25);
+  transition: box-shadow .15s, transform .1s;
+}
+.wg-btn:hover { box-shadow: 0 5px 18px rgba(201,162,39,.35); transform: translateY(-1px); }
+.wg-btn-restart {
+  background: linear-gradient(135deg, #003F87, #001533);
+  color: #fff; box-shadow: 0 3px 12px rgba(0,63,135,.2);
+}
 /* ═══ End Mayo White-Glove CSS ═══ */
 
 </style>
 </head>
-
 <body>
-<header>
-  <div class="header-top" style="max-width:1320px; margin:0 auto;">
-    <div class="brand">
-      <div class="brand-icon" style="background:linear-gradient(135deg,var(--mayo-gold,#C9A227),#B8941F);color:#001F4D;">MC</div>
-      <div>
-        <h1 style="font-family:'DM Sans',sans-serif;">Aqueduct T360 MATCH</h1>
-        <p class="tagline">Mayo Clinic &mdash; NEMT Program &middot; Community Investment Analysis</p>
-      </div>
+
+<!-- ══ Masthead ═══════════════════════════════════════════════════════════ -->
+<div class="demo-hero">
+  <div class="demo-hero-inner">
+    <div class="demo-hero-text">
+      <div class="demo-eyebrow">Aqueduct T360 MATCH &middot; Mayo Clinic &middot; Guided Investment Analysis</div>
+      <h1 class="demo-headline">Your CHNA data already makes <strong>the case for bank funding.</strong></h1>
+      <p class="demo-sub">A six-step walkthrough showing how Mayo Clinic's 2025 Olmsted County CHNA translates into a fully-funded, evidence-grounded NEMT program — with the financial model, CRA application, and bank strategy ready to deploy.</p>
     </div>
-    <div class="header-meta">
-      <div class="gate">
-        <span class="chip"><span id="gateDot" class="dot"></span> <span id="gateText">Tier 3 locked until Tier 2 score reaches 60</span></span>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-bar" style="max-width:1320px; margin:0 auto;">
-    <button class="tabbtn" id="tab_t1" data-view="t1">Assessment</button>
-    <button class="tabbtn" id="tab_t2" data-view="t2">CRA Readiness</button>
-    <button class="tabbtn" id="tab_t3" data-view="t3">ROI & Break-even</button>
-    <button class="tabbtn" id="tab_t4" data-view="t4">Implementation</button>
-    <button class="tabbtn" id="tab_t5" data-view="t5">Outcomes</button>
-    <button class="tabbtn" id="tab_t6" data-view="t6">Evaluation</button>
-    <button class="tabbtn" id="tab_drafts" data-view="drafts">Application Drafts</button>
-    <button class="tabbtn" id="tab_training" data-view="training" style="border-bottom-color:#f59e0b; color:#fbbf24;">🎓 Training Module</button>
-    <button class="tabbtn active" id="tab_mayo" data-view="mayo" style="border-bottom-color:#C9A227; color:#E8C84A; font-weight:700;">⚕ Mayo / Advanced CHNA</button>
-  </div>
-</header>
-
-<div class="wrap">
-  <div id="errbar" class="errbar"></div>
-  <div id="okbar" class="okbar"></div>
-
-  <!-- LEFT + RIGHT layout -->
-  <div class="grid grid-2">
-    <!-- LEFT: Upload and controls -->
-    <div class="card">
-      <div class="btnbar">
-        <button class="primary" id="btn_process">Process Files</button>
-        <button class="secondary" id="btn_demo">Load Demo Data</button>
-        <button id="btn_export">Export JSON</button>
-        <button class="danger" id="btn_reset">Reset</button>
-      </div>
-
-      <div class="field" style="margin-top:8px; border:none; padding:0; background:transparent;">
-        <label><span>Upload Documents</span><span class="pill">PDF / TXT</span></label>
-        <input id="file_input" type="file" multiple accept=".pdf,.txt"/>
-        <div class="small" style="margin-top:8px;">
-          Accepted: CHNA reports, Schedule H, CRA exam documents, internal memos. All processing occurs locally in your browser.
-        </div>
-      </div>
-
-      <div class="row" style="margin-top:10px;">
-        <div class="chip">Documents: <span class="mono" id="docs_count">0</span></div>
-        <div class="chip">Evidence: <span class="mono" id="ev_count">0</span></div>
-        <div class="chip">Top Score: <span class="mono" id="top_t2">&mdash;</span></div>
-      </div>
-
-      <div class="callout" style="margin-top:16px;">
-        <div class="tier-label">Transportation Analysis</div>
-        <div class="section-title" style="font-size:14px;">Transportation Disparity Spotlight</div>
-        <div class="small" style="margin-top:4px;">
-          Automatically detects subgroup amplification in transportation barriers (e.g., ages 65&ndash;74 vs. overall population) to surface partnership-grade opportunities.
-        </div>
-        <div class="row" style="margin-top:8px;">
-          <div class="chip">Overall: <b id="t_overall">&mdash;</b></div>
-          <div class="chip">Age 65&ndash;74: <b id="t_6574">&mdash;</b></div>
-          <div class="chip">Amplification: <b id="t_amp">&mdash;</b></div>
-        </div>
-      </div>
-
-      <div class="callout" style="margin-top:12px;">
-        <div class="tier-label">Regulatory Context</div>
-        <div class="section-title" style="font-size:14px;">CRA Eligibility Framework</div>
-        <div class="small" style="margin-top:4px;">
-          Each opportunity maps to specific qualifying criteria under 12 CFR 25.04(c)(3) with the applicable topic and example cited for exam defensibility.
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT: Views -->
-    <div class="card">
-      <!-- Tier 1 -->
-      <section id="view_t1" class="view active">
-        <div class="kpis">
-          <div class="kpi">
-            <div class="label">Top Disparity</div>
-            <div class="value" id="kpi_top">&mdash;</div>
-            <div class="hint" id="kpi_top_hint">Process documents to compute materiality.</div>
-          </div>
-          <div class="kpi">
-            <div class="label">Subgroup Concentration</div>
-            <div class="value" id="kpi_conc">&mdash;</div>
-            <div class="hint">Highlights where a targeted program will have the strongest case.</div>
-          </div>
-          <div class="kpi">
-            <div class="label">Priority Shortlist</div>
-            <div class="value" id="kpi_shortlist">&mdash;</div>
-            <div class="hint">Items recommended to advance to CRA Readiness.</div>
-          </div>
-          <div class="kpi">
-            <div class="label">Partner Angle</div>
-            <div class="small" id="kpi_angle">&mdash;</div>
-          </div>
-        </div>
-
-        <div class="grid" style="margin-top:16px;">
-          <div class="card-flat">
-            <div class="section-title">Disparities Materiality Matrix</div>
-            <div class="section-subtitle">
-              Materiality score (0&ndash;100) computed from <b>magnitude</b>, <b>subgroup differential</b>, and <b>prominence across documents</b>.
-              Transportation receives an amplification boost when subgroup disparity is detected.
-            </div>
-
-            <div class="split">
-              <div style="overflow:auto;">
-                <table id="tbl_materiality"></table>
-              </div>
-              <div>
-                <div class="section-title" style="font-size:14px;">Top Disparities Chart</div>
-                <canvas id="chart_materiality" height="230"></canvas>
-                <div class="small" style="margin-top:8px;">Ranked by materiality score (0&ndash;100).</div>
-              </div>
-            </div>
-
-            <div class="callout" style="margin-top:14px;">
-              <div class="tier-label">Recommendations</div>
-              <div class="section-title" style="font-size:14px;">Assessment Recommendations</div>
-              <div class="small" id="tier1_recs" style="margin-top:4px;">&mdash;</div>
-            </div>
-          </div>
-
-          <div class="card-flat">
-            <div class="section-title">Evidence Traceability</div>
-            <div class="section-subtitle">Each signal preserves the triggering text, source document, and page reference.</div>
-            <div style="overflow:auto;">
-              <table id="tbl_evidence"></table>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-flat" style="margin-top:16px;">
-          <div class="section-title">CHNA Quality & Compliance Gap Analysis</div>
-          <div class="section-subtitle">
-            Scores uploaded CHNA and Implementation Strategy documents against IRS documentation requirements
-            and the written comments community input requirement. Designed to surface common compliance gaps.
-          </div>
-
-          <div class="kpis">
-            <div class="kpi">
-              <div class="label">CHNA Completeness</div>
-              <div class="value" id="kpi_chna_q">&mdash;</div>
-              <div class="hint" id="kpi_chna_q_hint">Based on 7 IRS documentation elements (0&ndash;100).</div>
-            </div>
-            <div class="kpi">
-              <div class="label">IS Completeness</div>
-              <div class="value" id="kpi_is_q">&mdash;</div>
-              <div class="hint">Based on 3 IRS IS elements (0&ndash;100).</div>
-            </div>
-            <div class="kpi">
-              <div class="label">Written Comments</div>
-              <div class="value" id="kpi_input_req">&mdash;</div>
-              <div class="hint">Checks for: solicitation, receipt, and utilization of comments.</div>
-            </div>
-            <div class="kpi">
-              <div class="label">Public Availability</div>
-              <div class="value" id="kpi_public_avail">&mdash;</div>
-              <div class="hint">Presence of public posting language in uploaded files.</div>
-            </div>
-          </div>
-
-          <div class="split" style="margin-top:14px;">
-            <div style="overflow:auto;">
-              <table id="tbl_chna_gaps"></table>
-            </div>
-            <div>
-              <div class="callout">
-                <div class="tier-label">Action Items</div>
-                <div class="section-title" style="font-size:14px;">Remediation Plan</div>
-                <div class="small" id="chna_gap_recs" style="margin-top:4px;">Process documents to generate.</div>
-              </div>
-              <div class="callout" style="margin-top:10px;">
-                <div class="tier-label">Audit Trail</div>
-                <div class="section-title" style="font-size:14px;">Evidence Documentation</div>
-                <div class="small" style="margin-top:4px;">The table records the triggering snippet and page to support CHNA/IS remediation edits.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tier 2 -->
-      <section id="view_t2" class="view">
-        <div class="kpis">
-          <div class="kpi">
-            <div class="label">Best Opportunity Score</div>
-            <div class="value" id="t2_best">&mdash;</div>
-            <div class="hint" id="t2_best_hint">Score of 60 or above unlocks ROI modeling.</div>
-          </div>
-          <div class="kpi">
-            <div class="label">Transportation Opportunity</div>
-            <div class="value" id="t2_transport">&mdash;</div>
-            <div class="hint">Always evaluated due to common CHNA access barriers.</div>
-          </div>
-          <div class="kpi">
-            <div class="label">Eligibility Criterion</div>
-            <div class="small" id="t2_crit">&mdash;</div>
-          </div>
-          <div class="kpi">
-            <div class="label">Application Packet</div>
-            <div class="small" id="t2_packet">&mdash;</div>
-          </div>
-        </div>
-
-        <div class="grid" style="margin-top:16px;">
-          <div class="card-flat">
-            <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:space-between;">
-              <div>
-                <div class="section-title">CRA Eligibility & Application Readiness</div>
-                <div class="section-subtitle" style="margin-bottom:0;">Includes qualifying criterion and evidence requirements for exam defensibility.</div>
-              </div>
-              <button class="primary" id="btn_use_top">Advance to ROI Modeling</button>
-            </div>
-
-            <div style="overflow:auto; margin-top:12px;">
-              <table id="tbl_cra"></table>
-            </div>
-
-            <div class="callout" style="margin-top:14px;">
-              <div class="tier-label">Guidance</div>
-              <div class="section-title" style="font-size:14px;">Exam-Ready Documentation Prompts</div>
-              <div class="small" id="exam_prompts" style="margin-top:4px;">&mdash;</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tier 3 -->
-      <section id="view_t3" class="view">
-        <div class="callout">
-          <div class="tier-label">Financial Modeling</div>
-          <div class="section-title">NEMT No-Show ROI & Coding ROI Layer</div>
-          <div class="small" style="margin-top:4px;">
-            The base ROI maintains <b>Excel parity</b> (no added fixed/startup costs). Optionally enable the <b>Coding ROI Layer</b> to model
-            incremental upside from SDOH ICD-10 Z-code documentation and CPT reporting capture.
-          </div>
-        </div>
-
-        <div class="card-flat" style="margin-top:16px;">
-          <div class="callout" style="margin-bottom:16px;">
-            <div class="tier-label">Formula</div>
-            <div class="section-title" style="font-size:14px;">Base ROI Definition (Excel Parity)</div>
-            <div class="small" style="margin-top:4px;">
-              <b>Transport no-shows</b> = Visits &times; No-show rate &times; Transport share<br/>
-              <b>Prevented no-shows</b> = Transport no-shows &times; Mitigation rate<br/>
-              <b>Net benefit</b> = (Prevented &times; Net revenue) &minus; (Prevented &times; Marginal clinical cost) &minus; (Prevented &times; Trip cost &times; (1 + Overhead rate))
-            </div>
-          </div>
-
-          <div class="section-title" style="font-size:14px;">A) Volume & Access</div>
-          <div class="row">
-            <div class="field"><label>Annual targeted outpatient visits</label><input id="a_visits" type="number" value="40000"/></div>
-            <div class="field"><label>No-show rate (0.20 or 20)</label><input id="a_noshow" type="number" value="0.20" step="0.01"/></div>
-            <div class="field"><label>Share due to transportation (0.30 or 30)</label><input id="a_share" type="number" value="0.30" step="0.01"/></div>
-            <div class="field"><label>Net revenue per visit ($)</label><input id="a_netrev" type="number" value="225"/></div>
-            <div class="field"><label>Marginal clinical cost per visit ($)</label><input id="a_margc" type="number" value="90"/></div>
-          </div>
-
-          <div class="section-title" style="font-size:14px; margin-top:16px;">B) Program Inputs</div>
-          <div class="row">
-            <div class="field"><label>Mitigation rate (0.50 or 50)</label><input id="b_mitig" type="number" value="0.50" step="0.01"/></div>
-            <div class="field"><label>Trip cost ($)</label><input id="b_trip" type="number" value="60"/></div>
-            <div class="field"><label>Overhead rate (0.10 or 10)</label><input id="b_over" type="number" value="0.10" step="0.01"/></div>
-          </div>
-
-          <div class="section-title" style="font-size:14px; margin-top:16px;">C) CRA Scope</div>
-          <div class="row">
-            <div class="field"><label>LMI share (0.90 or 90)</label><input id="c_lmi" type="number" value="0.90" step="0.01"/></div>
-            <div class="field"><label>AA share (1.00 or 100)</label><input id="c_aa" type="number" value="1.00" step="0.01"/></div>
-            <div class="field"><label>Bank annual contribution ($/yr)</label><input id="c_bank" type="number" value="50000"/></div>
-          </div>
-
-          <div class="hr"></div>
-
-          <div class="callout">
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
-              <div>
-                <div class="tier-label">Optional</div>
-                <div class="section-title" style="font-size:14px;">Coding ROI Layer</div>
-                <div class="small" style="margin-top:4px;">
-                  Models incremental financial upside from improved coding and documentation capture. Does <b>not</b> alter the base ROI.
-                </div>
-              </div>
-              <div class="chip" style="cursor:pointer;">
-                <span style="font-weight:700;">Enable</span>
-                <input id="toggle_coding" type="checkbox" style="margin-left:8px; transform:scale(1.2); cursor:pointer;" />
-              </div>
-            </div>
-
-            <div id="coding_box" style="display:none; margin-top:12px;">
-              <div class="row">
-                <div class="field">
-                  <label>Z-code documentation capture rate (0&ndash;100%)</label>
-                  <input id="z_rate" type="number" value="25" min="0" max="100" step="1"/>
-                  <div class="small" style="margin-top:4px;">Percent of prevented visits with SDOH Z-codes documented.</div>
-                </div>
-                <div class="field">
-                  <label>Estimated $ uplift per Z-coded encounter</label>
-                  <input id="z_uplift" type="number" value="20" min="0" step="1"/>
-                  <div class="small" style="margin-top:4px;">Conservative estimate for improved reimbursement capture.</div>
-                </div>
-                <div class="field">
-                  <label>CPT capture uplift rate (0&ndash;100%)</label>
-                  <input id="cpt_rate" type="number" value="15" min="0" max="100" step="1"/>
-                  <div class="small" style="margin-top:4px;">Percent with additional coding/quality capture.</div>
-                </div>
-                <div class="field">
-                  <label>Estimated $ uplift per CPT-captured encounter</label>
-                  <input id="cpt_uplift" type="number" value="15" min="0" step="1"/>
-                  <div class="small" style="margin-top:4px;">Conservative estimate for quality program attribution.</div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="field">
-                  <label>Apply coding uplift to</label>
-                  <select id="coding_base">
-                    <option value="prevented" selected>Prevented no-shows (recovered visits)</option>
-                    <option value="all">All targeted visits (broad workflow uplift)</option>
-                  </select>
-                  <div class="small" style="margin-top:4px;">Default is conservative: apply only to recovered visits.</div>
-                </div>
-                <div class="field">
-                  <label>Notes (optional)</label>
-                  <input id="coding_notes" type="text" placeholder="e.g., Z75.3 transportation barrier documented via screening"/>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hr"></div>
-
-          <!-- CCM/TCM Layer -->
-          <div class="callout" style="border-left-color: var(--blue);">
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
-              <div>
-                <div class="tier-label" style="color:var(--blue);">Optional — Layer B</div>
-                <div class="section-title" style="font-size:14px;">CCM / TCM Capture Layer</div>
-                <div class="small" style="margin-top:4px;">
-                  Models incremental billing revenue from Chronic Care Management (CCM) and Transitional Care Management (TCM) when NEMT-enabled contact windows support non-face-to-face care management completion. <b>Time may not be double-counted across codes.</b>
-                </div>
-              </div>
-              <div class="chip" style="cursor:pointer;">
-                <span style="font-weight:700;">Enable</span>
-                <input id="toggle_ccm" type="checkbox" style="margin-left:8px; transform:scale(1.2); cursor:pointer;" />
-              </div>
-            </div>
-            <div id="ccm_box" style="display:none; margin-top:12px;">
-              <div style="background:rgba(220,38,38,.06); border:1px solid var(--red-border); border-radius:8px; padding:10px 14px; margin-bottom:12px; font-size:13px; color:var(--red); font-weight:600;">
-                ⚠️ Compliance guardrail: CCM/TCM time must be real, threshold-meeting, and non-duplicative across billed codes. Patient travel time is not billable. Always confirm with compliance before operationalizing.
-              </div>
-              <div class="section-title" style="font-size:13px; margin-bottom:8px;">CCM Inputs</div>
-              <div class="row">
-                <div class="field"><label>CCM-eligible patients</label><input id="ccm_patients" type="number" value="500"/></div>
-                <div class="field"><label>Enrollment/consent rate (%)</label><input id="ccm_enroll" type="number" value="40" step="1"/></div>
-                <div class="field"><label>Avg. billed months/patient-year</label><input id="ccm_months" type="number" value="8" step="1"/></div>
-                <div class="field"><label>Avg. allowed per patient-month ($)</label><input id="ccm_allowed" type="number" value="62" step="1"/></div>
-                <div class="field"><label>Billing success rate (%)</label><input id="ccm_success" type="number" value="85" step="1"/></div>
-                <div class="field"><label>Staff cost per minute ($)</label><input id="ccm_staff_rate" type="number" value="0.65" step="0.05"/></div>
-                <div class="field"><label>Staff minutes required per month</label><input id="ccm_minutes" type="number" value="20" step="5"/></div>
-              </div>
-              <div class="section-title" style="font-size:13px; margin-top:12px; margin-bottom:8px;">TCM Inputs</div>
-              <div class="row">
-                <div class="field"><label>Eligible discharges/year</label><input id="tcm_discharges" type="number" value="200"/></div>
-                <div class="field"><label>Reach/completion rate (%)</label><input id="tcm_reach" type="number" value="55" step="1"/></div>
-                <div class="field"><label>Share billed as 99496 (high MDM, 7-day) (%)</label><input id="tcm_high_share" type="number" value="35" step="1"/></div>
-                <div class="field"><label>Allowed — 99495 moderate MDM ($)</label><input id="tcm_allow_mod" type="number" value="215" step="1"/></div>
-                <div class="field"><label>Allowed — 99496 high MDM ($)</label><input id="tcm_allow_high" type="number" value="290" step="1"/></div>
-                <div class="field"><label>Billing success rate (%)</label><input id="tcm_success" type="number" value="82" step="1"/></div>
-                <div class="field"><label>Staff minutes per TCM episode</label><input id="tcm_minutes" type="number" value="45" step="5"/></div>
-                <div class="field"><label>Staff cost per minute ($)</label><input id="tcm_staff_rate" type="number" value="0.65" step="0.05"/></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hr"></div>
-
-          <!-- VBC Quality Layer -->
-          <div class="callout" style="border-left-color: var(--green);">
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
-              <div>
-                <div class="tier-label" style="color:var(--green);">Optional — Layer A</div>
-                <div class="section-title" style="font-size:14px;">VBC Quality Threshold Layer</div>
-                <div class="small" style="margin-top:4px;">
-                  Monetizes quality earn-back or bonus dollars when improved appointment completion enables measure closure under value-based contracts (e.g., diabetes glycemic status, BP control, post-discharge med rec, colorectal screening). <i>Requires a value-based contract with dollars at risk.</i>
-                </div>
-              </div>
-              <div class="chip" style="cursor:pointer;">
-                <span style="font-weight:700;">Enable</span>
-                <input id="toggle_vbc" type="checkbox" style="margin-left:8px; transform:scale(1.2); cursor:pointer;" />
-              </div>
-            </div>
-            <div id="vbc_box" style="display:none; margin-top:12px;">
-              <div class="row">
-                <div class="field">
-                  <label>Contract type</label>
-                  <select id="vbc_type">
-                    <option value="earnback">Withhold / linear earn-back (ACO-style)</option>
-                    <option value="cliff">Cliff / threshold bonus (Star Ratings-style)</option>
-                  </select>
-                </div>
-                <div class="field"><label>Dollars at risk in contract (total pool, $)</label><input id="vbc_at_risk" type="number" value="500000" step="1000"/></div>
-                <div class="field"><label>Baseline quality score (0&ndash;100)</label><input id="vbc_baseline" type="number" value="72" step="1"/></div>
-                <div class="field"><label>Projected quality score with NEMT (0&ndash;100)</label><input id="vbc_projected" type="number" value="79" step="1"/></div>
-              </div>
-              <div class="row" id="vbc_cliff_row" style="display:none;">
-                <div class="field"><label>Threshold score required for bonus</label><input id="vbc_threshold" type="number" value="75" step="1"/></div>
-                <div class="field"><label>Bonus amount if threshold met ($)</label><input id="vbc_bonus" type="number" value="150000" step="1000"/></div>
-              </div>
-              <div class="callout" style="margin-top:10px; background:var(--green-soft); border-left-color:var(--green);">
-                <div class="tier-label" style="color:var(--green);">Quality Measure Examples</div>
-                <div class="small" style="margin-top:4px;">
-                  <b>Diabetes Glycemic Status &gt;9%</b> (QPP Measure 001) — requires HbA1c/GMI classification; missed labs worsen performance.<br/>
-                  <b>Controlling High Blood Pressure</b> (Measure 236) — missed follow-ups reduce probability of documented control.<br/>
-                  <b>Colorectal Cancer Screening</b> (Measure 113) — missed PCP touchpoints reduce capture.<br/>
-                  <b>Transitions of Care / Med Rec</b> (Star Ratings) — post-discharge med rec requires a visit within 7/14 days.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="btnbar" style="margin-top:16px;">
-            <button class="primary" onclick="render_roi()">Run ROI Analysis</button>
-          </div>
-
-          <div class="kpis" style="margin-top:16px;">
-            <div class="kpi"><div class="label">Total Program Cost</div><div class="value" id="o_cost">&mdash;</div><div class="hint">Transport + overhead costs.</div></div>
-            <div class="kpi"><div class="label">Net Annual Benefit</div><div class="value" id="o_net">&mdash;</div><div class="hint">Recovered margin minus program cost.</div></div>
-            <div class="kpi"><div class="label">Coding Uplift</div><div class="value" id="o_code">&mdash;</div><div class="hint">Incremental documentation capture value.</div></div>
-            <div class="kpi"><div class="label">Net Benefit (Total)</div><div class="value" id="o_total_net">&mdash;</div><div class="hint">Base net + coding uplift.</div></div>
-            <div class="kpi"><div class="label">ROI (Total)</div><div class="value" id="o_roi">&mdash;</div><div class="hint">Net / program cost.</div></div>
-            <div class="kpi"><div class="label">Break-even Trip Cost</div><div class="value" id="o_tripmax">&mdash;</div><div class="hint">Maximum viable trip cost.</div></div>
-            <div class="kpi" style="border-color:var(--blue-border); background:var(--blue-soft);"><div class="label" style="color:var(--blue);">CCM Net Revenue</div><div class="value" id="o_ccm_net" style="color:var(--blue);">&mdash;</div><div class="hint">Layer B: net CCM billing contribution.</div></div>
-            <div class="kpi" style="border-color:var(--blue-border); background:var(--blue-soft);"><div class="label" style="color:var(--blue);">TCM Net Revenue</div><div class="value" id="o_tcm_net" style="color:var(--blue);">&mdash;</div><div class="hint">Layer B: net TCM billing contribution.</div></div>
-            <div class="kpi" style="border-color:var(--green-border); background:var(--green-soft);"><div class="label" style="color:var(--green);">VBC Quality Earn-back</div><div class="value" id="o_vbc_earn" style="color:var(--green);">&mdash;</div><div class="hint">Layer A: incremental quality dollars earned.</div></div>
-            <div class="kpi" style="border-color:var(--green-border); background:var(--green-soft);"><div class="label" style="color:var(--green);">All-in Net Value</div><div class="value" id="o_allin" style="color:var(--green);">&mdash;</div><div class="hint">FFS + Coding + CCM/TCM + VBC earn-back.</div></div>
-          </div>
-        </div>
-
-        <div class="split" style="margin-top:16px;">
-          <div class="card-flat">
-            <div class="section-title" style="font-size:14px;">ROI Waterfall — From Visits to Net Value</div>
-            <canvas id="roi_waterfall" height="260"></canvas>
-            <div class="small" style="margin-top:8px;">Base ROI bars reflect Excel parity. Optional layers shown in blue/green.</div>
-          </div>
-          <div class="card-flat">
-            <div class="section-title" style="font-size:14px;">All-Layers Value Stack</div>
-            <canvas id="roi_bar" height="260"></canvas>
-            <div class="small" style="margin-top:8px;">FFS base → Coding → CCM/TCM → VBC earn-back. Enable optional layers to populate.</div>
-          </div>
-        </div>
-
-        <div class="split" style="margin-top:16px;">
-          <div class="card-flat">
-            <div class="section-title" style="font-size:14px;">CRA Impact Outputs</div>
-            <div id="cra_box" class="codebox" style="min-height:220px;">Run ROI analysis to populate outputs.</div>
-          </div>
-          <div class="card-flat">
-            <div class="section-title" style="font-size:14px;">CCM/TCM + VBC Detail</div>
-            <div id="extended_layers_box" class="codebox" style="min-height:220px;">Enable optional layers and run ROI to populate.</div>
-          </div>
-        </div>
-
-        <div class="card-flat" style="margin-top:16px;">
-          <div class="section-title" style="font-size:14px;">Audit-Ready Output</div>
-          <div id="roi_audit" class="codebox">Run ROI analysis to generate audit memo.</div>
-        </div>
-      </section>
-
-      <!-- Tier 4 -->
-      <section id="view_t4" class="view">
-        <div class="callout">
-          <div class="tier-label">Operations Planning</div>
-          <div class="section-title">Implementation Plan</div>
-          <div class="small" style="margin-top:4px;">
-            Translates the selected CRA opportunity into an actionable plan: roles, timeline, workflow, data capture, and audit artifacts.
-          </div>
-        </div>
-        <div class="card-flat" style="margin-top:16px;">
-          <div class="section-title" style="font-size:14px;">30-60-90 Day Implementation Plan</div>
-          <div class="section-subtitle">Auto-populated from CRA Readiness selection and ROI assumptions when available.</div>
-          <div id="impl_plan" class="codebox" style="min-height:260px;">Run ROI analysis and select an opportunity to generate an implementation plan.</div>
-          <div class="btnbar" style="margin-top:12px;">
-            <button class="primary" onclick="generate_impl_plan()">Generate Plan</button>
-            <button onclick="copy_block('impl_plan')">Copy</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tier 5 -->
-      <section id="view_t5" class="view">
-        <div class="callout">
-          <div class="tier-label">Performance Reporting</div>
-          <div class="section-title">Outcomes Reporting</div>
-          <div class="small" style="margin-top:4px;">
-            Defines the reporting package for hospitals and banks: operational outputs, beneficiary counts, CRA metrics, and financial performance updates.
-          </div>
-        </div>
-        <div class="card-flat" style="margin-top:16px;">
-          <div class="section-title" style="font-size:14px;">Quarterly Outcomes Report Template</div>
-          <div class="section-subtitle">Includes CRA outputs (LMI trips, AA trips, bank $/LMI trip) and hospital operational KPIs.</div>
-          <div id="outcomes_report" class="codebox" style="min-height:260px;">Run ROI analysis to populate a draft outcomes report template.</div>
-          <div class="btnbar" style="margin-top:12px;">
-            <button class="primary" onclick="generate_outcomes_report()">Generate Report</button>
-            <button onclick="copy_block('outcomes_report')">Copy</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tier 6 -->
-      <section id="view_t6" class="view">
-        <div class="callout">
-          <div class="tier-label">Program Evaluation</div>
-          <div class="section-title">Evaluation Plan</div>
-          <div class="small" style="margin-top:4px;">
-            Formalizes evaluation methodology: baseline measurement, comparison approach, data sources, metrics, and governance for continuous improvement and CRA defensibility.
-          </div>
-        </div>
-        <div class="card-flat" style="margin-top:16px;">
-          <div class="section-title" style="font-size:14px;">Evaluation Plan Template</div>
-          <div class="section-subtitle">Designed for audit use and re-use across NEMT and broader SDOH interventions.</div>
-          <div id="eval_plan" class="codebox" style="min-height:260px;">Generate an evaluation plan using Assessment evidence, CRA criteria, and ROI assumptions.</div>
-          <div class="btnbar" style="margin-top:12px;">
-            <button class="primary" onclick="generate_eval_plan()">Generate Plan</button>
-            <button onclick="copy_block('eval_plan')">Copy</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Drafts -->
-      <section id="view_drafts" class="view">
-        <div class="callout">
-          <div class="tier-label">Document Generation</div>
-          <div class="section-title">CRA Application Draft Generator</div>
-          <div class="small" style="margin-top:4px;">
-            Generate exam-defensible draft artifacts from your analysis. Drafts incorporate uploaded evidence, eligibility criteria, and ROI scenarios.
-          </div>
-        </div>
-
-        <div class="card-flat" style="margin-top:16px;">
-          <div class="row">
-            <div class="field">
-              <label>Artifact Type</label>
-              <select id="draft_type">
-                <option value="cra_memo">CRA Activity Justification Memo</option>
-                <option value="exam_narrative">Examiner-Facing Narrative (PE language)</option>
-                <option value="crosswalk">CRA Eligibility Crosswalk Table</option>
-                <option value="term_sheet">Joint Partnership Term Sheet</option>
-                <option value="chna_brief">CHNA Implementation Alignment Brief</option>
-                <option value="monitor_plan">Monitoring & Evidence Plan</option>
-                <option value="pnl">Borrower P&L Statement (Hospital)</option>
-                <option value="proforma_3yr">Project Pro Forma Budget (3-Year)</option>
-                <option value="lender_pnl_3yr">Lender-Facing P&L (3-Year)</option>
-                <option value="lender_proforma_3yr">Lender-Facing Pro Forma (3-Year)</option>
-              </select>
-              <div class="small" style="margin-top:4px;">Choose the document to generate. Everything is editable after download.</div>
-            </div>
-
-            <div class="field">
-              <label>Opportunity / Activity</label>
-              <select id="draft_activity">
-                <option value="auto">Auto (Top Opportunity)</option>
-                <option value="nmt">Transportation-to-care (NEMT)</option>
-                <option value="food">Food access support</option>
-                <option value="care">Care navigation / referral infrastructure</option>
-              </select>
-              <div class="small" style="margin-top:4px;">Default uses the highest-scoring opportunity.</div>
-            </div>
-
-            <div class="field">
-              <label>Voice & Tone</label>
-              <select id="draft_tone">
-                <option value="bank">Bank CRA file (formal)</option>
-                <option value="joint" selected>Joint bank-hospital memo (board-ready)</option>
-                <option value="hospital">Hospital internal approval (ops/finance)</option>
-              </select>
-              <div class="small" style="margin-top:4px;">Changes emphasis, not the underlying data.</div>
-            </div>
-          </div>
-
-          <div class="btnbar" style="margin-top:12px;">
-            <button class="primary" id="btn_generate_draft">Generate Draft</button>
-            <button id="btn_copy_draft">Copy</button>
-            <button class="secondary" id="btn_download_draft">Download .txt</button>
-          </div>
-
-          <div class="split" style="margin-top:12px;">
-            <div class="card-flat">
-              <div class="section-title" style="font-size:14px;">Preview</div>
-              <div id="draft_preview" class="codebox" style="min-height:340px;">Select an artifact type and click <b>Generate Draft</b>.</div>
-            </div>
-            <div class="card-flat">
-              <div class="section-title" style="font-size:14px;">Quick Settings</div>
-              <div class="section-subtitle">Optional fields for quick tailoring without post-export editing.</div>
-              <div class="row" style="margin-top:0;">
-                <div class="field">
-                  <label>Project name (optional)</label>
-                  <input id="draft_project_name" type="text" placeholder="e.g., Senior Access Shuttle &mdash; 12-month pilot"/>
-                </div>
-                <div class="field">
-                  <label>Implementing partner (optional)</label>
-                  <input id="draft_partner" type="text" placeholder="e.g., County Transit / Nonprofit / Ride broker"/>
-                </div>
-              </div>
-              <div class="row">
-                <div class="field">
-                  <label>Pro forma growth (%/yr)</label>
-                  <input id="draft_growth" type="number" value="5" min="0" step="0.5"/>
-                </div>
-                <div class="field">
-                  <label>Cost inflation (%/yr)</label>
-                  <input id="draft_infl" type="number" value="3" min="0" step="0.5"/>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="field">
-                  <label>Assessment area notes (optional)</label>
-                  <input id="draft_scope_note" type="text" placeholder="e.g., Target ZIPs 56xxx within AA"/>
-                </div>
-                <div class="field">
-                  <label>Funding structure (optional)</label>
-                  <input id="draft_structure" type="text" placeholder="e.g., CRA-credited grant to nonprofit"/>
-                </div>
-              </div>
-
-              <div class="callout" style="margin-top:12px;">
-                <div class="tier-label">Tip</div>
-                <div class="small" style="margin-top:2px;">
-                  Run the <b>ROI & Break-even</b> analysis first to populate drafts with cost baseline and break-even assumptions.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+    <div class="demo-kpi-strip">
+      <div class="demo-kpi"><div class="demo-kpi-val">37%</div><div class="demo-kpi-lbl">Reduction in no-shows<br>(Shekelle 2022, HIGH certainty)</div></div>
+      <div class="demo-kpi"><div class="demo-kpi-val">3</div><div class="demo-kpi-lbl">2025 CHNA priorities<br>directly addressed</div></div>
+      <div class="demo-kpi"><div class="demo-kpi-val">7</div><div class="demo-kpi-lbl">Rochester MSA banks<br>with CRA obligations</div></div>
+      <div class="demo-kpi"><div class="demo-kpi-val">7</div><div class="demo-kpi-lbl">Audit-ready documents<br>generated instantly</div></div>
     </div>
   </div>
 
-  <!-- ============================
-       Mayo / Advanced CHNA (Full-width, sibling to training)
-       ============================ -->
-  <div id="view_mayo" class="view" style="margin-top:24px;">
-    <div class="card" style="border-top:4px solid #C9A227; padding:0;">
+  <!-- Progress rail -->
+  <div class="wg-rail" role="tablist">
+    <button class="wg-rail-btn wg-active" id="rb_chna" onclick="wgGo('chna')">
+        <span class="wg-rail-num">01</span>
+        <span class="wg-rail-lbl">CHNA Evidence</span>
+      </button>
+      <button class="wg-rail-btn" id="rb_linkage" onclick="wgGo('linkage')">
+        <span class="wg-rail-num">02</span>
+        <span class="wg-rail-lbl">CHNA → CRA Map</span>
+      </button>
+      <button class="wg-rail-btn" id="rb_roi" onclick="wgGo('roi')">
+        <span class="wg-rail-num">03</span>
+        <span class="wg-rail-lbl">ROI at Scale</span>
+      </button>
+      <button class="wg-rail-btn" id="rb_cra" onclick="wgGo('cra')">
+        <span class="wg-rail-num">04</span>
+        <span class="wg-rail-lbl">CRA Application</span>
+      </button>
+      <button class="wg-rail-btn" id="rb_banks" onclick="wgGo('banks')">
+        <span class="wg-rail-num">05</span>
+        <span class="wg-rail-lbl">Bank Strategy</span>
+      </button>
+      <button class="wg-rail-btn" id="rb_draft" onclick="wgGo('draft')">
+        <span class="wg-rail-num">06</span>
+        <span class="wg-rail-lbl">Generate Docs</span>
+      </button>
+  </div>
+</div>
 
-      <!-- Masthead -->
-      <div class="wg-hero">
-        <div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;">
-          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#C9A227,#E8C84A);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;color:#004B87;flex-shrink:0;margin-top:2px;">MC</div>
-          <div style="flex:1;min-width:200px;">
-            <div style="font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:3px;">Advanced Demo — Mayo Clinic · Olmsted County</div>
-            <div style="font-size:20px;font-weight:800;line-height:1.2;">CHNA-to-CRA Strategic Investment Navigator</div>
-            <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:3px;">2025 Olmsted County CHNA (Oct 7 2025) · Rochester MSA Assessment Area (Olmsted + Dodge Counties, MN)</div>
-          </div>
-        </div>
-        <div class="wg-rail" id="wg_rail">
-          <div class="wg-step active" id="ws_chna" onclick="wgNav('chna')">
-            <div class="wg-num"><span>1</span></div>
-            <div class="wg-step-label">CHNA Evidence</div>
-          </div>
-          <div class="wg-sep"></div>
-          <div class="wg-step" id="ws_linkage" onclick="wgNav('linkage')">
-            <div class="wg-num"><span>2</span></div>
-            <div class="wg-step-label">CHNA&nbsp;&rarr;&nbsp;CRA Map</div>
-          </div>
-          <div class="wg-sep"></div>
-          <div class="wg-step" id="ws_roi" onclick="wgNav('roi')">
-            <div class="wg-num"><span>3</span></div>
-            <div class="wg-step-label">ROI at Scale</div>
-          </div>
-          <div class="wg-sep"></div>
-          <div class="wg-step" id="ws_cra" onclick="wgNav('cra')">
-            <div class="wg-num"><span>4</span></div>
-            <div class="wg-step-label">CRA Application</div>
-          </div>
-          <div class="wg-sep"></div>
-          <div class="wg-step" id="ws_banks" onclick="wgNav('banks')">
-            <div class="wg-num"><span>5</span></div>
-            <div class="wg-step-label">Bank Strategy</div>
-          </div>
-          <div class="wg-sep"></div>
-          <div class="wg-step" id="ws_draft" onclick="wgNav('draft')">
-            <div class="wg-num"><span>6</span></div>
-            <div class="wg-step-label">Generate Docs</div>
-          </div>
-        </div>
+<!-- ══ Content ════════════════════════════════════════════════════════════ -->
+<div class="demo-body">
+
+    <div id="panel_chna" class="wg-panel" style="display:block;">
+      <div class="wg-badge">
+        <div class="wg-badge-num">01</div>
+        <div class="wg-badge-icon">🏥</div>
+        <div class="wg-badge-label">The Community Need</div>
       </div>
-
-      <!-- Panel container -->
-      <div style="padding:24px;">
-
-        <!-- PANEL: CHNA Evidence -->
-        <div id="mpanel_chna">
-          <div <div class="wg-step-badge"><div class="wg-step-badge-num">1</div>Community Health Need</div>
-          class="section-title" style="font-size:17px;margin-bottom:4px;">2025 Olmsted County CHNA &mdash; Three Priorities, Four Evidence Nodes</div>
+      
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">2025 Olmsted County CHNA &mdash; Three Priorities, Four Evidence Nodes</div>
           <p class="small" style="margin-bottom:16px;">Produced collaboratively by Mayo Clinic, Olmsted Medical Center, and Olmsted County Public Health Services. Available at <a href="https://storymaps.arcgis.com/collections/7651105f080c418891d71862b91ed210" target="_blank" style="color:var(--blue);">storymaps.arcgis.com</a>. Click each node to expand the NEMT connection.</p>
           <div class="kpis" style="margin-bottom:18px;">
             <div class="kpi"><div class="label">Priority #1 &mdash; Access to Care</div><div class="value" style="font-size:26px;">34%</div><div class="hint">of adults delayed care (2024 survey, N=937); 15% lack a PCP; top barrier: can&rsquo;t get appointment</div></div>
@@ -1668,19 +991,22 @@ input[type="file"]:hover{
             <button class="primary" onclick="mayoNav('linkage')">Map CHNA &rarr; CRA Opportunities &rarr;</button>
             <button class="secondary" onclick="window.open('https://storymaps.arcgis.com/collections/7651105f080c418891d71862b91ed210','_blank')">Open CHNA StoryMap &#8599;</button>
           </div>
-        
-          <div class="wg-bridge">
-            <div class="wg-bridge-text">You've seen where the need is. Now watch how Mayo's three CHNA priorities translate directly into CRA-qualifying activities — the regulatory translation that makes community benefit spend eligible for bank investment.</div>
-            <button class="wg-continue" onclick="wgNav('linkage')">
-              Continue &rarr;
-            </button>
-          </div>
         </div>
+      
+      <div class="wg-footer">
+        <p class="wg-bridge">With the need documented, the next question is: which of these priorities qualifies for bank funding — and exactly which federal regulation makes that possible.</p>
+        <button class="wg-btn" onclick="wgGo('linkage')">Continue &rarr;</button>
+      </div>
+    </div>
 
-        <!-- PANEL: Linkage Map -->
-        <div id="mpanel_linkage" style="display:none;">
-          <div <div class="wg-step-badge"><div class="wg-step-badge-num">2</div>CHNA → CRA Translation</div>
-          class="section-title" style="font-size:17px;margin-bottom:4px;">CHNA Priority &rarr; NEMT Program &rarr; CRA Activity Mapping</div>
+    <div id="panel_linkage" class="wg-panel" style="display:none;">
+      <div class="wg-badge">
+        <div class="wg-badge-num">02</div>
+        <div class="wg-badge-icon">🔗</div>
+        <div class="wg-badge-label">Translating Need to Funding</div>
+      </div>
+      
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">CHNA Priority &rarr; NEMT Program &rarr; CRA Activity Mapping</div>
           <p class="small" style="margin-bottom:16px;">Maps each 2025 CHNA priority to program elements, CRA classification, and Schedule H pathway &mdash; the evidence chain you present to banks. Rochester MSA Assessment Area = all of Olmsted County + all of Dodge County (confirmed by OCC examinations).</p>
           <div style="overflow-x:auto;margin-bottom:18px;">
             <table class="tbl" style="min-width:860px;font-size:13px;">
@@ -1699,19 +1025,22 @@ input[type="file"]:hover{
             <div class="callout" style="border-left:4px solid var(--blue);"><strong style="color:var(--blue);">&#127963; Assessment Area Confirmed</strong><p class="small" style="margin-top:6px;">The Rochester MSA CRA Assessment Area covers <strong>all of Olmsted County and all of Dodge County</strong> (OCC-confirmed). All three CHNA priorities are documented county-wide. A Mayo-anchored NEMT program sits squarely within every Rochester-branch bank&rsquo;s Assessment Area.</p></div>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="secondary" onclick="mayoNav('chna')">&larr; Back to CHNA</button><button class="primary" onclick="mayoNav('roi')">Build Financial Model &rarr;</button></div>
-        
-          <div class="wg-bridge">
-            <div class="wg-bridge-text">The linkage is established. Now see the full financial case at Mayo's operational scale — four revenue layers, sensitivity analysis, and the board-ready ROI framing that makes a 'yes' easy.</div>
-            <button class="wg-continue" onclick="wgNav('roi')">
-              Continue &rarr;
-            </button>
-          </div>
         </div>
+      
+      <div class="wg-footer">
+        <p class="wg-bridge">The regulatory pathway is clear. Now see what it's worth — a full financial model built at Mayo's actual operational scale, with four revenue layers and board-ready scenario framing.</p>
+        <button class="wg-btn" onclick="wgGo('roi')">Continue &rarr;</button>
+      </div>
+    </div>
 
-        <!-- PANEL: ROI at Mayo Scale -->
-        <div id="mpanel_roi" style="display:none;">
-          <div <div class="wg-step-badge"><div class="wg-step-badge-num">3</div>Financial Case at Scale</div>
-          class="section-title" style="font-size:17px;margin-bottom:4px;">Full ROI Model &mdash; Mayo Clinic / Olmsted County Scale</div>
+    <div id="panel_roi" class="wg-panel" style="display:none;">
+      <div class="wg-badge">
+        <div class="wg-badge-num">03</div>
+        <div class="wg-badge-icon">💰</div>
+        <div class="wg-badge-label">The Financial Case</div>
+      </div>
+      
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">Full ROI Model &mdash; Mayo Clinic / Olmsted County Scale</div>
           <p class="small" style="margin-bottom:4px;">59,421 Olmsted County patients in 2024 · 42,103 inpatient admissions · 84,800 ER visits · REP longitudinal population data since 1966. Defaults calibrated to Mayo's ambulatory pilot scale. Enable all layers to build the complete value stack.</p>
           <div id="mayo_l0_summary" style="margin-bottom:14px;display:none;background:rgba(201,162,39,.07);border-left:3px solid #C9A227;border-radius:8px;padding:10px 14px;"></div>
 
@@ -1871,19 +1200,22 @@ input[type="file"]:hover{
             <button class="primary" onclick="mayoNav('cra')">Build CRA Application &rarr;</button>
             <button onclick="mayoNav('draft')" style="background:linear-gradient(135deg,#7A5C00,#B88A00);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">&#128196; Generate Artifacts &rarr;</button>
           </div>
-        
-          <div class="wg-bridge">
-            <div class="wg-bridge-text">The ROI is compelling. Now build the five-section OCC/FDIC-ready application that transforms your financial case into a bank-executable CRA community development activity.</div>
-            <button class="wg-continue" onclick="wgNav('cra')">
-              Continue &rarr;
-            </button>
-          </div>
         </div>
+      
+      <div class="wg-footer">
+        <p class="wg-bridge">The numbers are compelling. Now convert them into a five-section application that a bank's CRA officer can put directly into their exam file.</p>
+        <button class="wg-btn" onclick="wgGo('cra')">Continue &rarr;</button>
+      </div>
+    </div>
 
-        <!-- PANEL: CRA Application -->
-        <div id="mpanel_cra" style="display:none;">
-          <div <div class="wg-step-badge"><div class="wg-step-badge-num">4</div>CRA Application</div>
-          class="section-title" style="font-size:17px;margin-bottom:4px;">CRA Activity Justification Builder &mdash; Five Sections</div>
+    <div id="panel_cra" class="wg-panel" style="display:none;">
+      <div class="wg-badge">
+        <div class="wg-badge-num">04</div>
+        <div class="wg-badge-icon">📋</div>
+        <div class="wg-badge-label">The Application</div>
+      </div>
+      
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">CRA Activity Justification Builder &mdash; Five Sections</div>
           <p class="small" style="margin-bottom:16px;">Pre-populated with 2025 Olmsted County CHNA data and Rochester MSA Assessment Area confirmation. Customize each field, then generate the draft document.</p>
           <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px;">
             <div style="background:linear-gradient(135deg,var(--navy),#1a3a5c);padding:11px 16px;display:flex;align-items:center;gap:10px;"><span style="font-size:20px;font-weight:900;color:#E8C84A;min-width:26px;">1</span><div><div style="font-size:13px;font-weight:700;color:#fff;">CHNA Citation &amp; Community Health Need</div><div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:1px;">Required for IRS Schedule H and CRA community development credit</div></div></div>
@@ -1942,19 +1274,22 @@ input[type="file"]:hover{
             </div>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="secondary" onclick="mayoNav('roi')">&larr; Back to ROI</button><button class="secondary" onclick="mayoNav('banks')">Identify Banks &rarr;</button><button class="primary" onclick="mayoNav('draft')">Generate Full Draft &rarr;</button></div>
-        
-          <div class="wg-bridge">
-            <div class="wg-bridge-text">The application is ready. Now identify which Rochester MSA banks to approach first, in what order, and with what framing — based on their actual CRA exam history.</div>
-            <button class="wg-continue" onclick="wgNav('banks')">
-              Continue &rarr;
-            </button>
-          </div>
         </div>
+      
+      <div class="wg-footer">
+        <p class="wg-bridge">You have the application. Now see which specific Rochester MSA banks to approach, in what order, and what to say — based on their actual CRA exam ratings and assessment area exposure.</p>
+        <button class="wg-btn" onclick="wgGo('banks')">Continue &rarr;</button>
+      </div>
+    </div>
 
-        <!-- PANEL: Bank Engagement -->
-        <div id="mpanel_banks" style="display:none;">
-          <div <div class="wg-step-badge"><div class="wg-step-badge-num">5</div>Bank Engagement Strategy</div>
-          class="section-title" style="font-size:17px;margin-bottom:4px;">Bank Engagement &mdash; Rochester MSA Assessment Area</div>
+    <div id="panel_banks" class="wg-panel" style="display:none;">
+      <div class="wg-badge">
+        <div class="wg-badge-num">05</div>
+        <div class="wg-badge-icon">🏦</div>
+        <div class="wg-badge-label">The Right Partners</div>
+      </div>
+      
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">Bank Engagement &mdash; Rochester MSA Assessment Area</div>
           <p class="small" style="margin-bottom:14px;">The Rochester MSA AA (Olmsted + Dodge counties) includes national, regional, and community banks all subject to CRA. Click each institution for a tailored pitch approach based on CRA exam history.</p>
           <div class="callout" style="border-left:4px solid #C9A227;background:rgba(201,162,39,.06);margin-bottom:16px;"><strong style="color:#7A5C00;">&#127919; Mayo&rsquo;s Strategic Advantage</strong><p class="small" style="margin-top:5px;">Mayo Clinic is the largest employer in Olmsted County. A CRA partnership with Mayo carries reputational value that bank CRA officers actively seek &mdash; it is a marquee exam file relationship. Lead with institutional standing, not dollar amount, then present the complete evidence package.</p></div>
           <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">
@@ -2013,19 +1348,22 @@ input[type="file"]:hover{
             </div>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="secondary" onclick="mayoNav('cra')">&larr; Back to Application</button><button class="primary" onclick="mayoNav('draft')">Generate Complete Draft &rarr;</button></div>
-        
-          <div class="wg-bridge">
-            <div class="wg-bridge-text">You know exactly who to approach and how. Now generate the complete document suite — seven audit-ready artifacts that make your package immediately actionable.</div>
-            <button class="wg-continue" onclick="wgNav('draft')">
-              Continue &rarr;
-            </button>
-          </div>
         </div>
+      
+      <div class="wg-footer">
+        <p class="wg-bridge">You know who to call and what to say. Now generate the complete document package — seven audit-ready artifacts that make this immediately actionable.</p>
+        <button class="wg-btn" onclick="wgGo('draft')">Continue &rarr;</button>
+      </div>
+    </div>
 
-        <!-- PANEL: Generate Artifacts -->
-        <div id="mpanel_draft" style="display:none;">
-          <div <div class="wg-step-badge"><div class="wg-step-badge-num">6</div>Generative Artifact Suite</div>
-          class="section-title" style="font-size:17px;margin-bottom:4px;">&#127775; Generative Artifact Suite &mdash; Mayo Clinic NEMT Program</div>
+    <div id="panel_draft" class="wg-panel" style="display:none;">
+      <div class="wg-badge">
+        <div class="wg-badge-num">06</div>
+        <div class="wg-badge-icon">✨</div>
+        <div class="wg-badge-label">Your Document Suite</div>
+      </div>
+      
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">&#127775; Generative Artifact Suite &mdash; Mayo Clinic NEMT Program</div>
           <p class="small" style="margin-bottom:14px;">Seven high-value artifacts pre-populated with 2025 Olmsted County CHNA data and your ROI model inputs. Each saves 4&ndash;8 hours of preparation. Generate, review, copy, and adapt. All financial figures pull live from the ROI model.</p>
 
           <!-- Artifact button grid -->
@@ -2094,429 +1432,17 @@ input[type="file"]:hover{
           </div>
         </div>
 
-      </div><!-- /panel container -->
-    </div><!-- /card -->
-  </div><!-- /view_mayo -->
-
-  <!-- ============================
-       Training Module (Full-width below grid)
-       ============================ -->
-  <div id="view_training" class="view" style="margin-top:24px;">
-    <div class="card" style="border-top:4px solid #f59e0b;">
-      <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px; flex-wrap:wrap;">
-        <div style="width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,#f59e0b,#d97706); display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;">🎓</div>
-        <div>
-          <div class="tier-label" style="color:#d97706;">Executive Training Module</div>
-          <div class="section-title" style="font-size:20px;">NEMT ROI &amp; Healthcare Benefits: From FFS to Value-Based Care</div>
-          <div class="section-subtitle" style="margin-bottom:0;">A structured, case-based executive program. Five exercises with context, predictions, learner reflections, and expert analyses.</div>
-        </div>
-      </div>
-
-      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
-        <button class="ex-nav-btn active" data-ex="1" onclick="showExercise(1)">1: The FFS Case</button>
-        <button class="ex-nav-btn" data-ex="2" onclick="showExercise(2)">2: The Coding Layer</button>
-        <button class="ex-nav-btn" data-ex="3" onclick="showExercise(3)">3: CCM/TCM Capture</button>
-        <button class="ex-nav-btn" data-ex="4" onclick="showExercise(4)">4: VBC Quality Threshold</button>
-        <button class="ex-nav-btn" data-ex="5" onclick="showExercise(5)">5: Full Board Case</button>
-      </div>
-
-      <!-- Exercise 1 -->
-      <div class="training-exercise active" id="ex_1">
-        <div class="ex-header">
-          <span class="ex-number">01</span>
-          <div>
-            <div class="ex-title">The FFS Contribution Margin Case</div>
-            <div class="ex-subtitle">Foundation — Understanding the base model before adding complexity</div>
-          </div>
-        </div>
-
-        <div class="ex-section ex-context">
-          <div class="ex-section-label">📋 Context</div>
-          <p>You are the CFO of a 450-bed regional health system. Your ambulatory division schedules <strong>40,000 outpatient visits/year</strong> with a <strong>20% overall no-show rate</strong>. Staff coding revealed transportation barriers account for <strong>30% of missed appointments</strong>—consistent with national LMI population estimates.</p>
-          <p>A county transit authority proposes co-sponsoring an NEMT pilot at <strong>$60/round trip</strong> (10% overhead), with an estimated <strong>50% mitigation rate</strong>. A community bank has committed $50,000 in CRA-eligible funding. Net revenue per kept visit: <strong>$225</strong>. Marginal clinical cost: <strong>$90</strong>. LMI share: 90%. All trips are within the CRA Assessment Area.</p>
-          <div class="ex-evidence-box">
-            <div class="ex-evidence-label">📚 Evidence Anchor</div>
-            <em>"Transportation barriers are a well-documented driver of missed care, delayed care, and poorer chronic disease management—making transportation a direct lever for both revenue recovery and quality performance."</em>
-            <span style="display:block; font-size:12px; color:var(--muted); margin-top:4px;">CMS VBID Transportation Use Case (CY2023) + NEMT systematic meta-analysis (PMC9026972)</span>
-          </div>
-        </div>
-
-        <div class="ex-section ex-prediction">
-          <div class="ex-section-label">🔮 Prediction Challenge</div>
-          <p><strong>Before calculating — predict the expected first-year net benefit from this NEMT pilot:</strong></p>
-          <div class="prediction-options" id="pred_1">
-            <div class="pred-option" onclick="selectPred(1,'a')">A. ~$40,000–$60,000 — modest positive, breakeven territory</div>
-            <div class="pred-option" onclick="selectPred(1,'b')">B. ~$80,000–$90,000 — meaningful positive, ROI slightly above 1×</div>
-            <div class="pred-option" onclick="selectPred(1,'c')">C. ~$150,000–$200,000 — strong positive, ROI above 2×</div>
-            <div class="pred-option" onclick="selectPred(1,'d')">D. Negative — trip costs exceed recovered margin</div>
-          </div>
-          <div class="pred-reveal" id="pred_reveal_1" style="display:none;">
-            <div class="pred-correct">✓ Correct answer: B — approximately $82,800 net benefit, ROI ≈ 1.05×</div>
-            <div class="pred-explanation">
-              Transport no-shows = 40,000 × 0.20 × 0.30 = <strong>2,400</strong><br/>
-              Prevented = 2,400 × 0.50 = <strong>1,200 visits</strong><br/>
-              Gross revenue = 1,200 × $225 = <strong>$270,000</strong><br/>
-              Marginal cost = 1,200 × $90 = <strong>$108,000</strong><br/>
-              Transport cost = 1,200 × $60 = $72,000 + overhead $7,200 = <strong>$79,200</strong><br/>
-              Net benefit = $270,000 − $108,000 − $79,200 = <strong>$82,800</strong>
-            </div>
-          </div>
-          <button class="reveal-btn" onclick="toggleReveal('pred_reveal_1')">Reveal Answer &amp; Calculation</button>
-        </div>
-
-        <div class="ex-section ex-reflection">
-          <div class="ex-section-label">🪞 Learner Reflection</div>
-          <ul class="ex-list">
-            <li>What assumption drives the most uncertainty — mitigation rate, trip cost, or no-show rate? Why?</li>
-            <li>At what trip cost does this program break even? How would you use that figure in vendor negotiations?</li>
-            <li>A 1.05× ROI may disappoint a board used to higher returns. How do you frame this as a platform investment, not just a financial return?</li>
-            <li>Why use <em>marginal</em> clinical cost rather than fully-loaded cost? What would happen to the ROI if you switched?</li>
-          </ul>
-          <textarea class="ref-textarea" placeholder="Enter your reflection notes (stored in session)..." id="ref_1" rows="4"></textarea>
-        </div>
-
-        <div class="ex-section ex-expert">
-          <div class="ex-section-label">🏛️ Expert Analysis</div>
-          <div class="expert-content">
-            <p><strong>The FFS contribution margin ROI is conservative by design.</strong> The $82,800 net benefit represents only <em>direct financial recovery</em> from prevented no-shows—it excludes chronic disease management effects, care management billing, and quality performance value. This is the floor, not the ceiling.</p>
-            <p><strong>Break-even:</strong> Maximum viable trip cost = net revenue − marginal cost = $225 − $90 = <strong>$135/trip</strong>. Your $60 trip provides $75 of headroom—a powerful vendor negotiating position and a clear "scale ceiling" for program expansion.</p>
-            <p><strong>Board framing:</strong> A 1.05× FFS ROI growing to 1.2–1.4× by Year 3 (efficiency gains + volume) is a compelling platform story when CCM/TCM and VBC layers are added. Present it as a foundation investment. The FFS layer alone is positive; the full investment case is substantially stronger.</p>
-            <p><strong>Marginal vs. fully-loaded cost:</strong> Fully-loaded cost ($180–$220/visit for a typical FQHC) would make the ROI negative—but this would be economically misleading. Existing clinical capacity is not newly purchased for recovered visits. The marginal cost model reflects actual incremental financial impact, which is the correct decision-making lens.</p>
-            <div class="expert-cite">
-              <strong>Nuance:</strong> The Chaiyachati (2018) pragmatic rideshare trial found no significant reduction in no-shows due to low uptake. Program design, patient engagement, and eligibility targeting matter as much as the financial model.
-            </div>
-          </div>
-        </div>
-
-        <div class="ex-nav-footer">
-          <button onclick="showExercise(2)" class="primary">Next: Exercise 2 — The Coding Layer →</button>
-        </div>
-      </div>
-
-      <!-- Exercise 2 -->
-      <div class="training-exercise" id="ex_2">
-        <div class="ex-header">
-          <span class="ex-number">02</span>
-          <div>
-            <div class="ex-title">The Coding &amp; Documentation Layer</div>
-            <div class="ex-subtitle">Z-codes, CPT capture, and incremental documentation value</div>
-          </div>
-        </div>
-
-        <div class="ex-section ex-context">
-          <div class="ex-section-label">📋 Context</div>
-          <p>Building on Exercise 1: your 1,200 recovered visits create an opportunity. Your informatics team proposes systematic <strong>SDOH Z-code screening</strong> (Z75.3 — transportation barrier) for NEMT-enabled patients at point of care. Estimated <strong>25% Z-code capture rate</strong> among recovered visits (conservative), with <strong>$20 average reimbursement uplift</strong> per Z-coded encounter. Separately, a <strong>CPT-level coding improvement</strong> reaches 15% of recovered visits at <strong>$15 uplift</strong> each.</p>
-          <p>Your coding director confirms: ICD-10-CM Z-codes for social determinants have been reportable as additional diagnoses since 2016. Some payers now incorporate SDOH documentation into quality incentive programs.</p>
-        </div>
-
-        <div class="ex-section ex-prediction">
-          <div class="ex-section-label">🔮 Prediction Challenge</div>
-          <p><strong>Predict the combined coding uplift from these two documentation improvements:</strong></p>
-          <div class="prediction-options" id="pred_2">
-            <div class="pred-option" onclick="selectPred(2,'a')">A. Under $5,000 — too conservative to matter</div>
-            <div class="pred-option" onclick="selectPred(2,'b')">B. $6,000–$10,000 — meaningful but small relative to FFS base</div>
-            <div class="pred-option" onclick="selectPred(2,'c')">C. $12,000–$15,000 — noteworthy secondary revenue</div>
-            <div class="pred-option" onclick="selectPred(2,'d')">D. Over $20,000 — significant relative to program cost</div>
-          </div>
-          <div class="pred-reveal" id="pred_reveal_2" style="display:none;">
-            <div class="pred-correct">✓ Correct: B — approximately $8,700 combined uplift</div>
-            <div class="pred-explanation">
-              Z-code uplift = 1,200 × 25% × $20 = <strong>$6,000</strong><br/>
-              CPT uplift = 1,200 × 15% × $15 = <strong>$2,700</strong><br/>
-              Total coding uplift = <strong>$8,700</strong><br/>
-              Combined net (FFS + coding) = $82,800 + $8,700 = <strong>$91,500</strong> | ROI = <strong>1.15×</strong>
-            </div>
-          </div>
-          <button class="reveal-btn" onclick="toggleReveal('pred_reveal_2')">Reveal Answer</button>
-        </div>
-
-        <div class="ex-section ex-reflection">
-          <div class="ex-section-label">🪞 Learner Reflection</div>
-          <ul class="ex-list">
-            <li>$8,700 is ~11% of your FFS net benefit. Is this worth the workflow investment for consistent Z-code documentation?</li>
-            <li>What governance and QA processes ensure Z-code documentation is accurate and audit-ready?</li>
-            <li>Your compliance team flags that CPT content is AMA-licensed IP. How does this affect your training platform and documentation tools?</li>
-            <li>Z-code documentation has value beyond reimbursement. Name two non-financial benefits of capturing SDOH barriers systematically in your EHR.</li>
-          </ul>
-          <textarea class="ref-textarea" placeholder="Enter your reflection notes..." id="ref_2" rows="4"></textarea>
-        </div>
-
-        <div class="ex-section ex-expert">
-          <div class="ex-section-label">🏛️ Expert Analysis</div>
-          <div class="expert-content">
-            <p><strong>The coding layer is additive but requires discipline.</strong> $8,700 in this scenario is modest in dollars, but the organizational habit—screening for SDOH barriers, documenting consistently, linking to care response—has compounding value beyond reimbursement.</p>
-            <p><strong>Non-financial benefits:</strong> (1) Z-code documentation creates a population health registry of patients with transportation barriers, enabling proactive outreach. (2) Systematic SDOH documentation supports CHNA evidence requirements (IRS Schedule H) and CRA defensibility—both central to this platform's regulatory use case.</p>
-            <p><strong>CPT licensing:</strong> AMA holds CPT copyright. Reference CMS MLN documents (which reproduce allowable CPT content under federal government license) rather than raw CPT descriptors when building training platforms or documentation tools.</p>
-            <p><strong>High-performing programs:</strong> A 25% Z-code capture rate is deliberately conservative. Programs with EHR workflow integration and staff training report 60–80% capture rates. At 60%, Z-code uplift alone reaches $14,400—and the SDOH registry value becomes proportionally larger.</p>
-          </div>
-        </div>
-
-        <div class="ex-nav-footer">
-          <button onclick="showExercise(1)" style="margin-right:8px;">← Previous</button>
-          <button onclick="showExercise(3)" class="primary">Next: Exercise 3 — CCM/TCM Capture →</button>
-        </div>
-      </div>
-
-      <!-- Exercise 3 -->
-      <div class="training-exercise" id="ex_3">
-        <div class="ex-header">
-          <span class="ex-number">03</span>
-          <div>
-            <div class="ex-title">CCM / TCM Capture via NEMT-Enabled Contact Windows</div>
-            <div class="ex-subtitle">Turning ride time into care management completion — compliantly</div>
-          </div>
-        </div>
-
-        <div class="ex-section ex-context">
-          <div class="ex-section-label">📋 Context</div>
-          <p><strong>CCM:</strong> Of your 40,000 annual visits, <strong>500 patients</strong> have 2+ chronic conditions qualifying for CCM. Current enrollment rate: <strong>40%</strong>. Clinical staff struggle with the 20-minute monthly non-face-to-face threshold—patients are hard to reach between visits. The NEMT program creates reliable contact windows. Enrolled patients average <strong>8 billed months/year</strong> at <strong>$62 allowed/month</strong>, 85% billing success rate. Staff: $0.65/min, 20 min/month required.</p>
-          <p><strong>TCM:</strong> Your system discharges <strong>200 TCM-eligible patients/year</strong>. Current follow-up completion rate: <strong>55%</strong> (many lack transportation for the required post-discharge visit). With NEMT: 35% qualify for 99496 (high MDM, 7-day, ~$290 allowed), 65% for 99495 (moderate MDM, 14-day, ~$215 allowed). Billing success: 82%. Staff: $0.65/min, 45 min/episode.</p>
-          <div class="ex-evidence-box">
-            <div class="ex-evidence-label">📚 CMS Policy Anchor</div>
-            <em>"CCM is non-face-to-face, time-based, and can be furnished by clinical staff incident-to. TCM requires interactive contact within 2 business days of discharge and face-to-face within 7 days (99496) or 14 days (99495)."</em>
-            <span style="display:block; font-size:12px; color:var(--muted); margin-top:4px;">CMS MLN Chronic Care Management + Transitional Care Management booklets</span>
-          </div>
-          <div style="background:var(--red-soft); border:1px solid var(--red-border); border-radius:8px; padding:10px 14px; margin-top:12px; font-size:13px; color:var(--red); font-weight:600;">
-            ⚠️ CCM/TCM time must be real, threshold-meeting, and non-duplicative across billed codes. Patient travel time is not billable.
-          </div>
-        </div>
-
-        <div class="ex-section ex-prediction">
-          <div class="ex-section-label">🔮 Prediction Challenge</div>
-          <p><strong>Estimate the combined net CCM + TCM contribution from this program:</strong></p>
-          <div class="prediction-options" id="pred_3">
-            <div class="pred-option" onclick="selectPred(3,'a')">A. Under $10,000 — billing complexity makes it marginal</div>
-            <div class="pred-option" onclick="selectPred(3,'b')">B. $10,000–$25,000 — meaningful add-on</div>
-            <div class="pred-option" onclick="selectPred(3,'c')">C. $25,000–$60,000 — substantial secondary revenue stream</div>
-            <div class="pred-option" onclick="selectPred(3,'d')">D. Over $60,000 — larger than the FFS improvement</div>
-          </div>
-          <div class="pred-reveal" id="pred_reveal_3" style="display:none;">
-            <div class="pred-correct">✓ Correct: C — approximately $67K CCM gross, $19K TCM; net ~$66K + $19K with labor deducted</div>
-            <div class="pred-explanation">
-              <strong>CCM:</strong> Enrolled = 500 × 40% = 200 | Billed months = 200 × 8 × 85% = 1,360<br/>
-              Gross CCM = 1,360 × $62 = $84,320 | Labor = 1,360 × 20 × $0.65 = $17,680<br/>
-              Net CCM = <strong>$66,640</strong> (full program; incremental attribution ~40–50%)<br/><br/>
-              <strong>TCM:</strong> Billable = 200 × 55% × 82% ≈ 90 episodes<br/>
-              Revenue = 90 × (35% × $290 + 65% × $215) = 90 × $240 = $21,600<br/>
-              Labor = 90 × 45 × $0.65 = $2,633 | Net TCM ≈ <strong>$18,967</strong>
-            </div>
-          </div>
-          <button class="reveal-btn" onclick="toggleReveal('pred_reveal_3')">Reveal Answer &amp; Compliance Notes</button>
-        </div>
-
-        <div class="ex-section ex-reflection">
-          <div class="ex-section-label">🪞 Learner Reflection</div>
-          <ul class="ex-list">
-            <li>Walk through the TCM 2-business-day contact workflow. Who makes the call? What's documented? What if Day 2 is a weekend?</li>
-            <li>Why is "incremental CCM attribution" important? If enrollment was already at 40%, what portion is truly attributable to NEMT?</li>
-            <li>Design a documentation protocol that prevents double-counting CCM time against other billed codes in the same month.</li>
-            <li>For TCM: what is the patient experience implication of ensuring the face-to-face visit happens within 7 days of discharge?</li>
-          </ul>
-          <textarea class="ref-textarea" placeholder="Enter your reflection notes..." id="ref_3" rows="4"></textarea>
-        </div>
-
-        <div class="ex-section ex-expert">
-          <div class="ex-section-label">🏛️ Expert Analysis</div>
-          <div class="expert-content">
-            <p><strong>CCM and TCM are powerful but require genuine operational infrastructure.</strong> The compliance requirements are non-negotiable: time must be real, documented, threshold-meeting, and non-duplicative. The NEMT-CCM strategy is operational — the reliable contact created by rides enables genuine clinical staff time (med reconciliation, care plan review, care coordination). The ride creates the window; the clinical work fills it.</p>
-            <p><strong>TCM aligns naturally:</strong> The 7/14-day face-to-face window is exactly where transportation barriers cause harm. A patient discharged Friday afternoon without transportation misses the 7-day window. Evidence (PMC12587199) shows TCM follow-up visits associated with decreased 30-day readmissions — the NEMT → TCM chain carries downstream readmission avoidance value beyond TCM billing alone.</p>
-            <p><strong>Incremental attribution:</strong> Be explicit. "Our CCM enrollment was already 40%. The NEMT contribution is the incremental patients enrolled and months billed <em>because</em> the contact window enabled consistent threshold completion." This is the honest, defensible number for CFO reporting.</p>
-          </div>
-        </div>
-
-        <div class="ex-nav-footer">
-          <button onclick="showExercise(2)" style="margin-right:8px;">← Previous</button>
-          <button onclick="showExercise(4)" class="primary">Next: Exercise 4 — VBC Quality Threshold →</button>
-        </div>
-      </div>
-
-      <!-- Exercise 4 -->
-      <div class="training-exercise" id="ex_4">
-        <div class="ex-header">
-          <span class="ex-number">04</span>
-          <div>
-            <div class="ex-title">The VBC Quality Threshold Layer</div>
-            <div class="ex-subtitle">When kept appointments become measurable quality dollars</div>
-          </div>
-        </div>
-
-        <div class="ex-section ex-context">
-          <div class="ex-section-label">📋 Context</div>
-          <p>Your health system participates in ACO REACH. CMS has structured a <strong>quality withhold of $500,000</strong>. Your baseline quality score: <strong>72/100</strong>. Quality improvement projects that if NEMT-enabled appointment completion improves adherence to four key measures, your composite could reach <strong>79/100</strong>.</p>
-          <p>The four measures affected by missed appointments: <em>Diabetes Glycemic Status &gt;9%</em> (QPP Measure 001), <em>Controlling High Blood Pressure</em> (Measure 236), <em>Colorectal Cancer Screening</em> (Measure 113), and <em>Transitions of Care/Medication Reconciliation</em> (Star Ratings). Each requires a completed clinical encounter within a measurement window.</p>
-          <p>Contract uses a <strong>linear earn-back model</strong>: quality score maps linearly to withhold recovery across the 100-point scale.</p>
-          <div class="ex-evidence-box">
-            <div class="ex-evidence-label">📚 VBC Policy Anchors</div>
-            <em>"In ACO REACH, CMS applies a quality withhold earned back based on a total quality score."</em>
-            <span style="display:block; font-size:12px; color:var(--muted); margin-top:4px;">CMS ACO REACH PY 2026 Model Update Quick Reference + QPP Measure Specifications</span>
-          </div>
-        </div>
-
-        <div class="ex-section ex-prediction">
-          <div class="ex-section-label">🔮 Prediction Challenge</div>
-          <p><strong>What is the incremental quality earn-back from a 7-point quality score improvement on a $500,000 withhold pool?</strong></p>
-          <div class="prediction-options" id="pred_4">
-            <div class="pred-option" onclick="selectPred(4,'a')">A. $7,000 — 1% of pool per point</div>
-            <div class="pred-option" onclick="selectPred(4,'b')">B. $35,000 — proportional linear recovery</div>
-            <div class="pred-option" onclick="selectPred(4,'c')">C. $50,000 — threshold step-up bonus</div>
-            <div class="pred-option" onclick="selectPred(4,'d')">D. Cannot be calculated without the contract floor and ceiling</div>
-          </div>
-          <div class="pred-reveal" id="pred_reveal_4" style="display:none;">
-            <div class="pred-correct">✓ Correct: B — $35,000 (linear); D is also defensible</div>
-            <div class="pred-explanation">
-              Linear earn-back: Incremental = (79 − 72) / 100 × $500,000 = 7% × $500,000 = <strong>$35,000</strong><br/><br/>
-              D is valid: real contracts have floors, ceilings, and non-linear steps. ACO REACH earn-back methodology is more complex; this exercise uses a simplified linear model for pedagogical clarity.
-            </div>
-          </div>
-          <button class="reveal-btn" onclick="toggleReveal('pred_reveal_4')">Reveal Answer</button>
-        </div>
-
-        <div class="ex-section ex-reflection">
-          <div class="ex-section-label">🪞 Learner Reflection</div>
-          <ul class="ex-list">
-            <li>The "quality-threshold bridge" says missed visits reduce both (1) opportunities to deliver care and (2) opportunities to document it measure-countably. Why does documentation matter independently in a VBC model?</li>
-            <li>If your contract uses a cliff model ($150K bonus only if you cross the 75-point threshold), how does this change the analysis for a 3-point vs. 7-point improvement?</li>
-            <li>You can't definitively attribute the 7-point improvement entirely to NEMT. Design a study to isolate NEMT's contribution to quality performance.</li>
-            <li>Name one measure where NEMT impact is direct and high-confidence, and one where attribution is uncertain.</li>
-          </ul>
-          <textarea class="ref-textarea" placeholder="Enter your reflection notes..." id="ref_4" rows="4"></textarea>
-        </div>
-
-        <div class="ex-section ex-expert">
-          <div class="ex-section-label">🏛️ Expert Analysis</div>
-          <div class="expert-content">
-            <p><strong>The quality layer is the most strategically significant but hardest to attribute.</strong> $35,000 in earn-back is compelling, but requires two defensible claims: (1) quality score improved, and (2) NEMT contributed meaningfully.</p>
-            <p><strong>High-confidence attribution — Transitions of Care:</strong> NEMT → face-to-face visit → medication reconciliation documented → Star measure potentially closed. This is the highest-confidence chain. A 55% → 75% TCM completion rate directly traces to a measurable quality outcome.</p>
-            <p><strong>Lower-confidence — Diabetes glycemic status:</strong> A kept appointment enables an HbA1c draw, which is necessary but not sufficient. The draw must be ordered, performed, and below threshold in the measurement period. NEMT improves probability at each step but doesn't guarantee closure.</p>
-            <p><strong>Cliff vs. linear:</strong> In a cliff model, 72 → 74.9 earns $0; 74.9 → 75.1 earns $150,000. This creates extremely high marginal ROI near thresholds—making NEMT a strategically critical investment in the right contract year. Always model both structures for leadership.</p>
-          </div>
-        </div>
-
-        <div class="ex-nav-footer">
-          <button onclick="showExercise(3)" style="margin-right:8px;">← Previous</button>
-          <button onclick="showExercise(5)" class="primary">Next: Exercise 5 — The Full Board Case →</button>
-        </div>
-      </div>
-
-      <!-- Exercise 5 -->
-      <div class="training-exercise" id="ex_5">
-        <div class="ex-header">
-          <span class="ex-number">05</span>
-          <div>
-            <div class="ex-title">The All-In ROI Decision: Making the Board Case</div>
-            <div class="ex-subtitle">Synthesis — integrating all four layers into an executive recommendation</div>
-          </div>
-        </div>
-
-        <div class="ex-section ex-context">
-          <div class="ex-section-label">📋 Context</div>
-          <p>You present to the board finance committee. The pilot costs $79,200 in program cost. The bank CRA partner has committed $50,000 — reducing your net cash outlay to <strong>$29,200</strong>. You have now modeled all four value layers:</p>
-          <div style="background:var(--bg-warm); border-radius:10px; padding:14px; margin-top:10px; overflow-x:auto;">
-            <table style="width:100%; font-size:13px; min-width:480px;">
-              <tr><th style="text-align:left;">Value Layer</th><th style="text-align:right;">Annual Value</th><th style="text-align:left; padding-left:12px;">Attribution Confidence</th></tr>
-              <tr><td>FFS base — recovered contribution margin</td><td style="text-align:right;"><strong>$82,800</strong></td><td style="padding-left:12px; color:var(--green);">High — direct calculation</td></tr>
-              <tr><td>Coding uplift (Z-codes + CPT capture)</td><td style="text-align:right;">$8,700</td><td style="padding-left:12px; color:var(--amber);">Medium — requires workflow</td></tr>
-              <tr><td>CCM net contribution (incremental ~40%)</td><td style="text-align:right;">$26,656</td><td style="padding-left:12px; color:var(--amber);">Medium — requires enrollment lift</td></tr>
-              <tr><td>TCM net contribution</td><td style="text-align:right;">$18,967</td><td style="padding-left:12px; color:var(--green);">High — completion directly enabled</td></tr>
-              <tr><td>VBC quality earn-back (linear, 7 pts)</td><td style="text-align:right;">$35,000</td><td style="padding-left:12px; color:var(--amber);">Low-medium — attribution model req'd</td></tr>
-              <tr style="border-top:2px solid var(--border); font-weight:700;"><td>Total all-in value</td><td style="text-align:right;"><strong>$172,123</strong></td><td></td></tr>
-              <tr><td style="color:var(--muted);">Less: Total program cost</td><td style="text-align:right; color:var(--red);">($79,200)</td><td></td></tr>
-              <tr><td style="color:var(--muted);">Bank CRA contribution offset</td><td style="text-align:right; color:var(--green);">+$50,000</td><td></td></tr>
-              <tr style="font-weight:700; color:var(--green);"><td>Net value to health system</td><td style="text-align:right;"><strong>$142,923</strong></td><td></td></tr>
-            </table>
-          </div>
-        </div>
-
-        <div class="ex-section ex-prediction">
-          <div class="ex-section-label">🔮 Prediction Challenge</div>
-          <p><strong>The board asks: "What is the all-in ROI on our net cash outlay of $29,200?"</strong></p>
-          <div class="prediction-options" id="pred_5">
-            <div class="pred-option" onclick="selectPred(5,'a')">A. ~2.8× — good but not exceptional</div>
-            <div class="pred-option" onclick="selectPred(5,'b')">B. ~4.9× — strong return on total program cost basis</div>
-            <div class="pred-option" onclick="selectPred(5,'c')">C. ~4.9× net outlay; ROI on program cost = 1.17× base only</div>
-            <div class="pred-option" onclick="selectPred(5,'d')">D. The ROI calculation is misleading without knowing which layers are truly incremental</div>
-          </div>
-          <div class="pred-reveal" id="pred_reveal_5" style="display:none;">
-            <div class="pred-correct">✓ C and D are both defensible — here's the full picture</div>
-            <div class="pred-explanation">
-              <strong>All-in net on program cost:</strong> $172,123 − $79,200 = $92,923 net | ROI = $92,923 / $79,200 = <strong>1.17×</strong><br/>
-              <strong>On net cash outlay:</strong> Net value $142,923 / net outlay $29,200 = <strong>4.89×</strong><br/><br/>
-              D is valid: CCM/TCM and VBC layers require operational investment beyond the NEMT trip cost. Attribution transparency is essential. Present three scenarios: conservative (FFS + coding = $91,500), base (+ TCM = $110,467), optimistic (all layers = $172,123).
-            </div>
-          </div>
-          <button class="reveal-btn" onclick="toggleReveal('pred_reveal_5')">Reveal Answer &amp; Board Framing</button>
-        </div>
-
-        <div class="ex-section ex-reflection">
-          <div class="ex-section-label">🪞 Learner Reflection</div>
-          <ul class="ex-list">
-            <li>The board skeptic: "What's the downside case if mitigation rate drops to 30% and VBC earn-back doesn't materialize?" Build that scenario.</li>
-            <li>A board member with banking experience: "How does the CRA structure benefit us beyond the $50,000?" What are the non-financial benefits?</li>
-            <li>Your CMO: "What's the patient experience case independent of the financial model?" How do you answer?</li>
-            <li>After pilot success, the board wants to scale. Name the top three operational risks and how you'd mitigate them.</li>
-          </ul>
-          <textarea class="ref-textarea" placeholder="Enter your final synthesis notes..." id="ref_5" rows="5"></textarea>
-        </div>
-
-        <div class="ex-section ex-expert">
-          <div class="ex-section-label">🏛️ Expert Analysis</div>
-          <div class="expert-content">
-            <p><strong>Present with attribution discipline, not optimism.</strong> $172K in total value against $79K in program cost is strong on paper. But a board that approves expecting $172K and receives $82K (FFS only) will feel misled. Present three scenarios explicitly: conservative, base, and optimistic.</p>
-            <p><strong>Downside scenario (30% mitigation):</strong> Prevented = 720 visits | Net FFS = 720 × ($225−$90) − 720 × $66 = $97,200 − $47,520 = <strong>$49,680</strong>. The program is still profitable at the FFS level in the downside case. The $135/trip break-even provides substantial headroom above the $60 trip cost.</p>
-            <p><strong>CRA partnership value beyond dollars:</strong> (1) Subsidized program cost; (2) credibility with community stakeholders and regulators; (3) potential for multi-year commitment enabling scaling; (4) joint community engagement supporting CHNA requirements; (5) a regulatory record citable in IRS Schedule H community benefit documentation.</p>
-            <p><strong>The patient experience case:</strong> For a patient managing Type 2 diabetes, hypertension, and limited income, a missed appointment is not an inconvenience — it is a gap in chronic disease management that compounds over months and years. NEMT restores their agency to access care they need. That equity dimension is the moral foundation of the program and should precede the financial case in every board presentation.</p>
-            <p><strong>Top three scaling risks:</strong> (1) Vendor operational quality — on-time pickup rates deteriorate at scale without strong SLA enforcement; (2) Eligibility drift — LMI and AA verification weakens at scale, creating CRA/Schedule H audit exposure; (3) Documentation burden — service logs and beneficiary data must scale with program volume, requiring EHR integration.</p>
-          </div>
-        </div>
-
-        <!-- Module Summary -->
-        <div class="ex-section" style="background:linear-gradient(135deg, rgba(13,148,136,.05), rgba(37,99,235,.05)); border:1px solid var(--teal-border); border-radius:var(--radius); padding:20px; margin-top:20px;">
-          <div class="ex-section-label">🏁 Module Complete</div>
-          <p style="font-size:15px; color:var(--navy); font-weight:700; margin-bottom:8px;">You have completed the NEMT ROI &amp; Healthcare Benefits Executive Training Module.</p>
-          <p style="color:var(--muted); font-size:14px;">Across five exercises you built a complete understanding of NEMT's value case — from FFS contribution margin through coding documentation, care management billing, and value-based quality earn-back — alongside the attribution, compliance, and operational discipline required to realize it in practice.</p>
-          <div class="kpis" style="margin-top:16px;">
-            <div class="kpi"><div class="label">FFS Layer</div><div class="value" style="font-size:18px;">$82,800</div><div class="hint">High confidence base</div></div>
-            <div class="kpi"><div class="label">Coding Layer</div><div class="value" style="font-size:18px;">$8,700</div><div class="hint">Medium confidence add-on</div></div>
-            <div class="kpi" style="border-color:var(--blue-border); background:var(--blue-soft);"><div class="label" style="color:var(--blue);">CCM/TCM Layers</div><div class="value" style="font-size:18px; color:var(--blue);">~$45,600</div><div class="hint">Requires ops infrastructure</div></div>
-            <div class="kpi" style="border-color:var(--green-border); background:var(--green-soft);"><div class="label" style="color:var(--green);">VBC Quality</div><div class="value" style="font-size:18px; color:var(--green);">$35,000</div><div class="hint">Attribution-dependent</div></div>
-          </div>
-          <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
-            <button class="primary" onclick="setView('t3')">→ Open ROI Calculator</button>
-            <button class="secondary" onclick="setView('t4')">→ Build Implementation Plan</button>
-            <button onclick="window.print()">🖨️ Print Module</button>
-          </div>
-        </div>
-
-        <div class="ex-nav-footer">
-          <button onclick="showExercise(4)">← Previous Exercise</button>
-        </div>
-      </div>
-
-      <!-- Citation accordion -->
-      <div style="margin-top:24px; border-top:1px solid var(--border); padding-top:20px;">
-        <button onclick="var d=this.nextElementSibling; d.style.display=d.style.display==='none'?'block':'none';" style="font-weight:700; color:var(--navy); background:var(--bg-warm); width:100%; text-align:left;">📚 Evidence &amp; Policy Citations ▾</button>
-        <div style="display:none; margin-top:12px;" class="small">
-          <div style="display:grid; gap:8px;">
-            <div class="callout"><strong>CMS MLN — Chronic Care Management Services</strong> | cms.gov/files/document/chroniccaremanagement.pdf | Official CMS guidance on CCM billing requirements, eligible codes, and compliance.</div>
-            <div class="callout"><strong>CMS MLN — Transitional Care Management Services</strong> | cms.gov/files/document/mln908628-transitional-care-management-services.pdf | Official TCM: 2-day contact, 7/14-day visit windows, and med rec requirements.</div>
-            <div class="callout"><strong>CMS VBID Transportation Use Case (CY2023)</strong> | cms.gov/priorities/innovation/media/document/vbid-cy2023-transportation-use-case | CMS framing of transportation as a chronic disease management enablement strategy.</div>
-            <div class="callout"><strong>ACO REACH PY 2026 Quality Withhold Methodology</strong> | cms.gov/priorities/innovation/aco-reach-model-performance-year-2026-model-update-quick-reference | CMS earn-back mechanics and quality withhold structure.</div>
-            <div class="callout"><strong>NEMT Systematic Meta-Analysis</strong> | pmc.ncbi.nlm.nih.gov/articles/PMC9026972/ | Pooled evidence: transportation interventions associated with fewer missed appointments.</div>
-            <div class="callout"><strong>Chaiyachati et al. (2018)</strong> | gwern.net/doc/sociology/technology/2018-chaiyachati.pdf | Pragmatic rideshare RCT; no significant improvement due to low uptake—key nuance for program design.</div>
-            <div class="callout"><strong>QPP Measure 001 — Diabetes Glycemic Status &gt;9%</strong> | qpp.cms.gov | HbA1c/GMI classification requirement; missed visits increase "missing/not performed" risk.</div>
-            <div class="callout"><strong>QPP Measure 113 — Colorectal Cancer Screening</strong> | qpp.cms.gov | Annual screening measure; missed PCP touchpoints reduce capture and closure.</div>
-            <div class="callout"><strong>CMS 2026 Star Ratings Technical Notes</strong> | cms.gov/files/document/2026-star-ratings-technical-notes.pdf | Transitions of care / medication reconciliation measure methodology.</div>
-            <div class="callout"><strong>OIG Safe Harbor — Transportation (2016)</strong> | federalregister.gov | Compliance guardrails for provider-arranged transportation; fact-specific application required.</div>
-            <div class="callout"><strong>AMA CPT Licensing FAQ</strong> | ama-assn.org/practice-management/cpt | AMA holds CPT copyright; licensing required for platform display of CPT descriptors.</div>
-          </div>
-        </div>
+      
+      
+      <div class="wg-footer wg-footer-last">
+        <p class="wg-bridge">You now have everything Mayo needs to launch a fully-funded, evidence-grounded, bank-partnered NEMT program — documented, modeled, and drafted.</p>
+        <button class="wg-btn wg-btn-restart" onclick="wgGo('chna')">&#8635; Review from Start</button>
       </div>
     </div>
-  </div>
 </div>
 
-<div class="footer">
-  CHNA-CRA Compliance Navigator &mdash; All processing occurs locally. No data leaves your browser.
+<div style="text-align:center;padding:16px;font-size:11px;color:#94a3b8;">
+  All processing occurs locally in your browser. No data leaves your device.
 </div>
 
 <script>
@@ -3389,9 +2315,9 @@ document.querySelectorAll(".tabbtn").forEach(btn=>{
 // ------------------------------
 // Buttons
 // ------------------------------
-const _be=document.getElementById("btn_export"); if(_be) _be.addEventListener("click", exportReport);
+document.getElementById("btn_export").addEventListener("click", exportReport);
 
-const _br=document.getElementById("btn_reset"); if(_br) _br.addEventListener("click", ()=>{
+document.getElementById("btn_reset").addEventListener("click", ()=>{
   clearErr();
   state.docs=[]; state.evidence=[]; state.findings=[]; state.opportunities=[]; state.selectedOpp=null; state.chnaEval=[];
   state.transport={overall:null, age6574:null};
@@ -3411,7 +2337,7 @@ const _br=document.getElementById("btn_reset"); if(_br) _br.addEventListener("cl
   showOk("Reset complete.");
 });
 
-const _bd=document.getElementById("btn_demo"); if(_bd) _bd.addEventListener("click", ()=>{
+document.getElementById("btn_demo").addEventListener("click", ()=>{
   clearErr();
   // Demo based on your exact framing: 2.7% overall, 8.5% age 65-74
   const demoText =
@@ -3439,7 +2365,7 @@ const _bd=document.getElementById("btn_demo"); if(_bd) _bd.addEventListener("cli
   showOk("Demo loaded (transportation differential).");
 });
 
-const _bp=document.getElementById("btn_process"); if(_bp) _bp.addEventListener("click", async ()=>{
+document.getElementById("btn_process").addEventListener("click", async ()=>{
   clearErr();
   showOk("Processing… (parsing documents and updating Tier 1–3 outputs)");
   try{
@@ -3505,7 +2431,7 @@ const _bp=document.getElementById("btn_process"); if(_bp) _bp.addEventListener("
   }
 });
 
-const _bu=document.getElementById("btn_use_top"); if(_bu) _bu.addEventListener("click", ()=>{
+document.getElementById("btn_use_top").addEventListener("click", ()=>{
   if(!state.opportunities.length){
     showErr("No Tier 2 opportunities available yet.");
     return;
@@ -5419,40 +4345,38 @@ window.downloadMayoDraft = function() {
 
 
 
-/* ── White-Glove Guided Navigation ── */
-var _wgHistory = [];
-var _wgCurrent = 'chna';
+/* ── Mayo White-Glove Navigation ── */
+var _wgOrder = ['chna','linkage','roi','cra','banks','draft'];
 
-window.wgNav = function(panel) {
-  // Update step rail
-  ['chna','linkage','roi','cra','banks','draft'].forEach(function(p, i) {
-    var step = document.getElementById('ws_' + p);
-    if (!step) return;
-    step.classList.remove('active', 'done');
-    var order = ['chna','linkage','roi','cra','banks','draft'];
-    var targetIdx = order.indexOf(panel);
-    var thisIdx   = order.indexOf(p);
-    if (p === panel) step.classList.add('active');
-    else if (thisIdx < targetIdx) step.classList.add('done');
+window.wgGo = function(target) {
+  var ti = _wgOrder.indexOf(target);
+
+  // Update panels
+  _wgOrder.forEach(function(pid) {
+    var panel = document.getElementById('panel_' + pid);
+    if (panel) panel.style.display = (pid === target) ? 'block' : 'none';
   });
-  _wgCurrent = panel;
-  // Delegate to the original mayoNav (display:none/block toggle)
-  if (typeof mayoNav === 'function') mayoNav(panel);
-  // Scroll to top of mayo card
-  var card = document.querySelector('#view_mayo .card');
-  if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Update rail buttons
+  _wgOrder.forEach(function(pid, i) {
+    var btn = document.getElementById('rb_' + pid);
+    if (!btn) return;
+    btn.classList.remove('wg-active', 'wg-done');
+    if (pid === target) btn.classList.add('wg-active');
+    else if (i < ti) btn.classList.add('wg-done');
+  });
+
+  // Trigger ROI calc when landing on ROI panel
+  if (target === 'roi' && typeof calcMayoROI === 'function') {
+    setTimeout(calcMayoROI, 80);
+  }
+  // NO scrollIntoView — content area is fixed, user stays put
 };
 
-// Set initial state on load
-(function() {
-  var iv = setInterval(function() {
-    if (typeof setView === 'function') {
-      clearInterval(iv);
-      setView('mayo');
-      wgNav('chna');
-    }
-  }, 50);
-})();
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+  wgGo('chna');
+});
 
 </script>
 </body>
