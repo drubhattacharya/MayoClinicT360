@@ -1910,13 +1910,13 @@ function strengthBadge(str){
 function renderTransportSpotlight(){
   const o = state.transport.overall;
   const a = state.transport.age6574;
-  document.getElementById("t_overall").textContent = (o==null) ? "—" : fmtPct(o);
-  document.getElementById("t_6574").textContent = (a==null) ? "—" : fmtPct(a);
+  (document.getElementById('t_overall')||{})['textContent'] = (o==null) ? "—" : fmtPct(o);
+  (document.getElementById('t_6574')||{})['textContent'] = (a==null) ? "—" : fmtPct(a);
   if(o!=null && a!=null && o>0){
     const amp = a/o;
-    document.getElementById("t_amp").textContent = `${amp.toFixed(1)}×`;
+    (document.getElementById('t_amp')||{})['textContent'] = `${amp.toFixed(1)}×`;
   }else{
-    document.getElementById("t_amp").textContent = "—";
+    (document.getElementById('t_amp')||{})['textContent'] = "—";
   }
 }
 
@@ -2462,9 +2462,9 @@ if(covEl && covRead){
 
 // Initial render placeholders
 renderTransportSpotlight();
-document.getElementById("tbl_materiality").innerHTML = "<tr><th>Disparity</th><th>Segment</th><th>Magnitude</th><th>Δ Concentration</th><th>Prominence</th><th>Score</th><th>Recommendation</th><th>Evidence</th></tr><tr><td colspan='8'>Upload documents and click Process Files.</td></tr>";
-document.getElementById("tbl_evidence").innerHTML = "<tr><th>Disparity</th><th>Snippet</th><th>Doc</th><th>Page</th></tr><tr><td colspan='4'>—</td></tr>";
-document.getElementById("tbl_cra").innerHTML = "<tr><th>Opportunity</th><th>CRA test mapping</th><th>Criterion satisfied</th><th>Strength</th><th>Score</th><th>Scope guidance</th><th>Application packet checklist</th></tr><tr><td colspan='7'>—</td></tr>";
+{const _e=document.getElementById("tbl_materiality"); if(_e) _e.innerHTML="<tr><th>Disparity</th><th>Segment</th><th>Magnitude</th><th>Δ Concentration</th><th>Prominence</th><th>Score</th><th>Recommendation</th><th>Evidence</th></tr><tr><td colspan='8'>Upload documents and click Process Files.</td></tr>";}
+{const _e=document.getElementById("tbl_evidence"); if(_e) _e.innerHTML="<tr><th>Disparity</th><th>Snippet</th><th>Doc</th><th>Page</th></tr><tr><td colspan='4'>—</td></tr>";}
+{const _e=document.getElementById("tbl_cra"); if(_e) _e.innerHTML="<tr><th>Opportunity</th><th>CRA test mapping</th><th>Criterion satisfied</th><th>Strength</th><th>Score</th><th>Scope guidance</th><th>Application packet checklist</th></tr><tr><td colspan='7'>—</td></tr>";}
 if(document.getElementById("tbl_chna_gaps")) document.getElementById("tbl_chna_gaps").innerHTML = "<tr><th>Document</th><th>CHNA score</th><th>IS score</th><th>Written comments</th><th>Public availability</th><th>Top gaps (auto)</th><th>Evidence</th></tr><tr><td colspan=\"7\">—</td></tr>";
 if(document.getElementById("chna_gap_recs")) document.getElementById("chna_gap_recs").textContent = "Upload CHNA/IS documents and click Process Files.";
 
