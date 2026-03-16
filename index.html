@@ -716,15 +716,17 @@ input[type="file"]:hover{
 
 *, *::before, *::after { box-sizing: border-box; }
 
-body {
+html, body {
   font-family: 'DM Sans', system-ui, sans-serif;
   background: #F0F4F8; margin: 0; padding: 0;
+  height: 100%; overflow: hidden;
 }
 
 /* ── Hero masthead ── */
 .demo-hero {
   background: linear-gradient(140deg, #001533 0%, #003F87 55%, #0A3566 100%);
-  padding: 32px 40px 0; position: relative; overflow: hidden;
+  padding: 32px 40px 0; position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100; overflow: hidden;
 }
 .demo-hero::before {
   content: ''; position: absolute;
@@ -814,7 +816,15 @@ body {
 .wg-rail-btn.wg-done .wg-rail-lbl { color: rgba(255,255,255,.55); }
 
 /* ── Content area ── */
-.demo-body { max-width: 1100px; margin: 0 auto; padding: 28px 24px 60px; }
+.demo-body {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow-y: auto;
+  padding-top: 220px; /* space for fixed hero — will be set precisely by JS */
+}
+.demo-body-inner {
+  max-width: 1100px; margin: 0 auto; padding: 28px 24px 60px;
+}
 
 /* ── Panel ── */
 .wg-panel { }
@@ -920,7 +930,7 @@ body {
 </div>
 
 <!-- ══ Content ════════════════════════════════════════════════════════════ -->
-<div class="demo-body">
+<div class="demo-body"><div class="demo-body-inner">
 
     <div id="panel_chna" class="wg-panel" style="display:block;">
       <div class="wg-badge">
@@ -1439,9 +1449,9 @@ body {
         <button class="wg-btn wg-btn-restart" onclick="wgGo('chna')">&#8635; Review from Start</button>
       </div>
     </div>
-</div>
+</div></div>
 
-<div style="text-align:center;padding:16px;font-size:11px;color:#94a3b8;">
+<div style="position:fixed;bottom:0;left:0;right:0;text-align:center;padding:10px;background:rgba(240,244,248,.9);font-size:11px;color:#94a3b8;">
   All processing occurs locally in your browser. No data leaves your device.
 </div>
 
@@ -3494,14 +3504,8 @@ window.toggleReveal = function(id){
 // ═══════════════════════════════════════════════════════════
 
 window.mayoNav = function(panel) {
-  ['chna','linkage','roi','cra','banks','draft'].forEach(p => {
-    const el = document.getElementById('mpanel_' + p);
-    if (el) el.style.display = (p === panel) ? 'block' : 'none';
-  });
-  document.querySelectorAll('.mayo-subnav').forEach(b => b.classList.remove('active-subnav'));
-  const btn = document.getElementById('mn_' + panel);
-  if (btn) btn.classList.add('active-subnav');
-  if (panel === 'roi') { setTimeout(calcMayoROI, 60); }
+  // Delegate to wgGo — all navigation unified through one function
+  if (typeof wgGo === 'function') wgGo(panel);
 };
 
 window.toggleMEN = function(n) {
@@ -4368,8 +4372,22 @@ window.wgGo = function(target) {
   if (target === 'roi' && typeof calcMayoROI === 'function') {
     setTimeout(calcMayoROI, 80);
   }
-  // NO scrollIntoView — content area is fixed, user stays put
+  // Scroll the content area (not the page) to top on panel switch
+  var body = document.querySelector('.demo-body');
+  if (body) body.scrollTop = 0;
 };
+
+
+// Adjust demo-body padding to match actual hero height
+function adjustLayout() {
+  var hero = document.querySelector('.demo-hero');
+  var body = document.querySelector('.demo-body');
+  if (hero && body) {
+    body.style.paddingTop = (hero.offsetHeight + 8) + 'px';
+  }
+}
+window.addEventListener('load', adjustLayout);
+window.addEventListener('resize', adjustLayout);
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
