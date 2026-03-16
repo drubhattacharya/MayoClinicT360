@@ -725,8 +725,8 @@ html, body {
 /* ── Hero masthead ── */
 .demo-hero {
   background: linear-gradient(140deg, #001533 0%, #003F87 55%, #0A3566 100%);
-  padding: 32px 40px 0; position: fixed; top: 0; left: 0; right: 0;
-  z-index: 100; overflow: hidden;
+  padding: 20px 36px 0; position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,.35);
 }
 .demo-hero::before {
   content: ''; position: absolute;
@@ -735,29 +735,26 @@ html, body {
   pointer-events: none;
 }
 .demo-hero-inner {
-  display: flex; align-items: flex-start; justify-content: space-between;
-  gap: 24px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto;
-  position: relative;
+  display: flex; align-items: center; justify-content: flex-start;
+  gap: 20px; max-width: 1300px; margin: 0 auto;
+  position: relative; padding-bottom: 14px;
 }
-.demo-hero-text { flex: 1; min-width: 260px; padding-bottom: 20px; }
+.demo-hero-text { flex-shrink: 0; }
 .demo-eyebrow {
   font-size: 10px; font-weight: 700; text-transform: uppercase;
   letter-spacing: .18em; color: rgba(201,162,39,.8); margin-bottom: 10px;
 }
 .demo-headline {
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: clamp(22px, 3vw, 34px); font-weight: 400; font-style: italic;
-  color: #fff; margin: 0 0 8px; line-height: 1.18;
+  font-size: clamp(16px, 1.8vw, 22px); font-weight: 400; font-style: italic;
+  color: #fff; margin: 0 0 0; line-height: 1.2;
 }
 .demo-headline strong {
   font-style: normal;
   background: linear-gradient(120deg, #C9A227 0%, #E8C84A 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.demo-sub {
-  font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.65;
-  max-width: 520px; margin: 0;
-}
+.demo-sub { display: none; }
 .demo-kpi-strip {
   display: flex; gap: 20px; flex-wrap: wrap; align-items: center;
   padding: 12px 0 20px;
@@ -777,9 +774,10 @@ html, body {
 
 /* ── Progress rail ── */
 .wg-rail {
-  display: flex; align-items: stretch; background: rgba(0,0,0,.25);
-  border-top: 1px solid rgba(255,255,255,.08);
-  overflow-x: auto; scrollbar-width: none; max-width: 100%;
+  display: flex; align-items: stretch; background: rgba(0,0,0,.2);
+  border-top: 1px solid rgba(255,255,255,.1);
+  overflow-x: auto; scrollbar-width: none; width: 100%;
+  margin-left: -36px; margin-right: -36px; padding-left: 36px;
 }
 .wg-rail::-webkit-scrollbar { display: none; }
 .wg-rail-btn {
@@ -818,9 +816,9 @@ html, body {
 /* ── Content area ── */
 .demo-body {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 90px; left: 0; right: 0; bottom: 0;
   overflow-y: auto;
-  padding-top: 220px; /* space for fixed hero — will be set precisely by JS */
+  background: #F0F4F8;
 }
 .demo-body-inner {
   max-width: 1100px; margin: 0 auto; padding: 28px 24px 60px;
@@ -892,12 +890,7 @@ html, body {
       <h1 class="demo-headline">Your CHNA data already makes <strong>the case for bank funding.</strong></h1>
       <p class="demo-sub">A six-step walkthrough showing how Mayo Clinic's 2025 Olmsted County CHNA translates into a fully-funded, evidence-grounded NEMT program — with the financial model, CRA application, and bank strategy ready to deploy.</p>
     </div>
-    <div class="demo-kpi-strip">
-      <div class="demo-kpi"><div class="demo-kpi-val">37%</div><div class="demo-kpi-lbl">Reduction in no-shows<br>(Shekelle 2022, HIGH certainty)</div></div>
-      <div class="demo-kpi"><div class="demo-kpi-val">3</div><div class="demo-kpi-lbl">2025 CHNA priorities<br>directly addressed</div></div>
-      <div class="demo-kpi"><div class="demo-kpi-val">7</div><div class="demo-kpi-lbl">Rochester MSA banks<br>with CRA obligations</div></div>
-      <div class="demo-kpi"><div class="demo-kpi-val">7</div><div class="demo-kpi-lbl">Audit-ready documents<br>generated instantly</div></div>
-    </div>
+    
   </div>
 
   <!-- Progress rail -->
@@ -4378,16 +4371,6 @@ window.wgGo = function(target) {
 };
 
 
-// Adjust demo-body padding to match actual hero height
-function adjustLayout() {
-  var hero = document.querySelector('.demo-hero');
-  var body = document.querySelector('.demo-body');
-  if (hero && body) {
-    body.style.paddingTop = (hero.offsetHeight + 8) + 'px';
-  }
-}
-window.addEventListener('load', adjustLayout);
-window.addEventListener('resize', adjustLayout);
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
