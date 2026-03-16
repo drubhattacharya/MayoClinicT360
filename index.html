@@ -7,266 +7,63 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
-/* CHNA–CRA Compliance Navigator — Executive-grade theme */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-:root{
-  /* Primary palette — trustworthy navy/teal for healthcare & finance */
-  --navy:#0f2b46;
-  --navy-light:#1a3a5c;
-  --teal:#0d9488;
-  --teal-light:#14b8a6;
-  --teal-soft:rgba(13,148,136,.08);
-  --teal-border:rgba(13,148,136,.25);
-
-  /* Neutrals */
-  --ink:#0f172a;
-  --muted:#475569;
-  --subtle:#64748b;
-  --light:#94a3b8;
-  --border:rgba(15,23,42,.10);
-  --border-strong:rgba(15,23,42,.15);
-  --bg-page:#f8fafc;
-  --bg-warm:#f1f5f9;
-  --card:#ffffff;
-
-  /* Accents */
-  --blue:#2563eb;
-  --blue-soft:rgba(37,99,235,.06);
-  --blue-border:rgba(37,99,235,.18);
-  --green:#059669;
-  --green-soft:rgba(5,150,105,.06);
-  --green-border:rgba(5,150,105,.20);
-  --amber:#d97706;
-  --amber-soft:rgba(217,119,6,.06);
-  --amber-border:rgba(217,119,6,.20);
-  --red:#dc2626;
-  --red-soft:rgba(220,38,38,.06);
-  --red-border:rgba(220,38,38,.20);
-
-  /* Effects */
-  --shadow-sm:0 1px 2px rgba(15,23,42,.05);
-  --shadow:0 4px 16px rgba(15,23,42,.06), 0 1px 3px rgba(15,23,42,.04);
-  --shadow-lg:0 10px 40px rgba(15,23,42,.08), 0 2px 6px rgba(15,23,42,.04);
-  --radius:12px;
-  --radius-lg:16px;
-  --mono: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-}
-
-/* ============================
-   Base
-   ============================ */
-*,*::before,*::after{box-sizing:border-box;}
-
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box}
+html{height:100%;overflow:hidden}
 body{
-  margin:0;
-  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  background: var(--bg-page);
-  color:var(--ink);
-  font-size:15px;
-  line-height:1.55;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin:0;padding:0;
+  height:100vh;overflow:hidden;
+  display:flex;flex-direction:column;
+  background:#EEF2F7;
+  font-family:'DM Sans',system-ui,sans-serif;
+  font-size:14px;line-height:1.55;color:#1a2332;
 }
-
-/* ============================
-   Header
-   ============================ */
-header{
-  background: var(--navy);
-  color: #fff;
-  padding: 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 12px rgba(15,23,42,.15);
-}
-.header-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  padding:16px 24px 12px;
-  flex-wrap:wrap;
-}
-.brand{display:flex; align-items:center; gap:14px;}
-.brand-icon{
-  width:40px; height:40px; border-radius:10px;
-  background: linear-gradient(135deg, var(--teal), var(--teal-light));
-  display:flex; align-items:center; justify-content:center;
-  font-size:20px; font-weight:900; color:#fff;
-  box-shadow: 0 2px 8px rgba(13,148,136,.3);
-  flex-shrink:0;
-}
-.brand h1{
-  margin:0; font-size:19px; font-weight:800; letter-spacing:-0.02em;
-  line-height:1.2;
-}
-.brand .tagline{
-  margin:0; font-size:12px; font-weight:500; color:rgba(255,255,255,.65);
-  letter-spacing:0.01em;
-}
-
-.header-meta{
-  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
-}
-
-.gate{
-  display:flex; align-items:center; gap:8px;
-}
-.gate .chip{
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.15);
-  color:rgba(255,255,255,.85);
-  font-size:12px;
-  padding:5px 12px;
-}
-
-/* Tab navigation bar */
-.tab-bar{
-  display:flex;
-  gap:2px;
-  padding: 0 24px;
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-}
-.tab-bar::-webkit-scrollbar{display:none;}
-
-.tabbtn{
-  border:none;
-  background:transparent;
-  color:rgba(255,255,255,.6);
-  border-radius:0;
-  padding:10px 16px;
-  font-weight:600;
-  font-size:13px;
-  cursor:pointer;
-  white-space:nowrap;
-  transition: color .15s, border-color .15s;
-  border-bottom:2px solid transparent;
-  letter-spacing:0.01em;
-}
-.tabbtn:hover{
-  color:rgba(255,255,255,.9);
-}
-.tabbtn.active{
-  color:#fff;
-  border-bottom-color: var(--teal-light);
-  background:rgba(255,255,255,.05);
-}
-
-/* ============================
-   Layout
-   ============================ */
-.wrap{
-  max-width:1320px;
-  margin:0 auto;
-  padding:20px 24px 48px;
-}
-h1{margin:0;}
-
-.grid{display:grid; gap:16px;}
-.grid-2{grid-template-columns: 360px 1fr;}
-@media (max-width: 1024px){ .grid-2{grid-template-columns:1fr;} }
-
-/* ============================
-   Cards
-   ============================ */
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  box-shadow:var(--shadow);
-  padding:20px;
-}
-.card-flat{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:16px;
-  box-shadow:none;
-}
-
-/* ============================
-   Buttons
-   ============================ */
-button{
-  border:1px solid var(--border-strong);
-  background:#fff;
-  border-radius:8px;
-  padding:9px 16px;
-  font-weight:600;
-  font-size:13px;
-  cursor:pointer;
-  color:var(--muted);
-  transition: all .15s ease;
-  font-family:inherit;
-  line-height:1.4;
-}
-button:hover{
-  background:var(--bg-warm);
-  border-color:var(--border-strong);
-  color:var(--ink);
-}
-button.primary{
-  background: var(--teal);
-  color:#fff;
-  border-color: var(--teal);
-  font-weight:700;
-}
-button.primary:hover{
-  background: var(--teal-light);
-  border-color: var(--teal-light);
-  color:#fff;
-  box-shadow: 0 2px 8px rgba(13,148,136,.25);
-}
-button.secondary{
-  background: var(--blue-soft);
-  color: var(--blue);
-  border-color: var(--blue-border);
-}
-button.secondary:hover{
-  background: rgba(37,99,235,.12);
-}
-button.danger{
-  color: var(--red);
-  border-color: var(--red-border);
-  background: var(--red-soft);
-}
-button.danger:hover{
-  background: rgba(220,38,38,.12);
-}
-
-.btnbar{
-  display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; align-items:center;
-}
-
-/* ============================
-   Pills & Chips
-   ============================ */
-.pill{
-  display:inline-block; padding:2px 10px; border-radius:999px;
-  background:var(--teal-soft); border:1px solid var(--teal-border);
-  font-size:11px; font-weight:700; color:var(--teal);
-  text-transform:uppercase; letter-spacing:0.04em;
-}
-.chip{
-  display:inline-flex; align-items:center; gap:6px;
-  padding:5px 12px; border-radius:999px;
-  border:1px solid var(--border); background:var(--bg-warm);
-  font-size:12px; font-weight:600; color:var(--muted);
+/* ── Header ── */
+.hdr{flex-shrink:0;background:linear-gradient(140deg,#001533 0%,#003A7A 60%,#0A3566 100%);box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.hdr-top{display:flex;align-items:center;gap:16px;padding:14px 32px 10px}
+.logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#C9A227,#A07810);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#001533;flex-shrink:0}
+.brand{font-size:12px;font-weight:700;color:rgba(255,255,255,.85)}
+.brand span{color:rgba(255,255,255,.4);font-weight:400}
+.tagline{font-size:clamp(14px,1.5vw,18px);font-style:italic;color:rgba(255,255,255,.8);margin:2px 0 0;line-height:1.2}
+.tagline b{font-style:normal;background:linear-gradient(120deg,#C9A227,#E8C84A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* ── Rail ── */
+.rail{display:flex;align-items:stretch;background:rgba(0,0,0,.18);border-top:1px solid rgba(255,255,255,.08);overflow-x:auto;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rb{display:flex;align-items:center;gap:8px;padding:10px 20px 11px;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;font-family:inherit;flex-shrink:0;transition:background .15s;white-space:nowrap}
+.rb:hover{background:rgba(255,255,255,.07)}
+.rb.rb-on{border-bottom-color:#C9A227;background:rgba(201,162,39,.1)}
+.rn{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.35);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.rb.rb-on .rn{background:#C9A227;color:#001533}
+.rb.rb-done .rn{background:rgba(201,162,39,.25);color:#C9A227;font-size:0}
+.rb.rb-done .rn::after{content:'✓';font-size:11px}
+.rl{font-size:12px;font-weight:600;color:rgba(255,255,255,.35)}
+.rb.rb-on .rl{color:#fff;font-weight:700}
+.rb.rb-done .rl{color:rgba(255,255,255,.55)}
+/* ── Content pane ── */
+#content{flex:1 1 0;min-height:0;overflow-y:auto;overflow-x:hidden;padding:0}
+/* ── Panel ── */
+.panel{max-width:1080px;margin:0 auto;padding:24px 28px}
+.panel-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 14px rgba(0,21,51,.09)}
+.panel-bar{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#001533,#003A7A);padding:11px 18px}
+.pnum{width:22px;height:22px;border-radius:50%;background:#C9A227;color:#001533;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.picon{font-size:15px}
+.ptitle{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#C9A227}
+.panel-/* body padding removed */
+/* ── Footer ── */
+.c-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 24px 20px;background:#FAFBFC;border-top:1px solid #E8ECF2;border-radius:0 0 12px 12px}
+.c-bridge{flex:1;min-width:180px;margin:0;font-size:13px;line-height:1.65;color:#4a5568;font-style:italic;padding-left:12px;border-left:3px solid rgba(201,162,39,.55)}
+.c-btn{flex-shrink:0;white-space:nowrap;background:linear-gradient(135deg,#C9A227,#A07810);color:#001533;border:none;border-radius:9px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 3px 14px rgba(201,162,39,.3);transition:transform .1s}
+.c-btn:hover{transform:translateY(-1px)}
+.c-btn-end{background:linear-gradient(135deg,#003A7A,#001533);color:#fff}
+/* ── Content styles needed by panels ── */
+.section-title{
+  font-size:16px;
+  font-weight:800;
+  color:var(--navy);
+  margin-bottom:4px;
+  letter-spacing:-0.01em;
 }
 .small{font-size:13px; color:var(--muted); line-height:1.5;}
-.mono{font-family:var(--mono); font-size:13px;}
-
-/* ============================
-   KPI Cards
-   ============================ */
-.kpis{display:grid; grid-template-columns: repeat(4,1fr); gap:12px;}
-@media (max-width: 1024px){ .kpis{grid-template-columns: repeat(2,1fr);} }
-@media (max-width: 640px){ .kpis{grid-template-columns:1fr;} }
-
 .kpi{
   border:1px solid var(--border);
   border-radius:var(--radius);
@@ -274,9 +71,6 @@ button.danger:hover{
   background:#fff;
   position:relative;
   transition: box-shadow .15s;
-}
-.kpi:hover{
-  box-shadow: var(--shadow-sm);
 }
 .kpi .label{
   font-size:12px; color:var(--subtle); font-weight:600;
@@ -289,31 +83,9 @@ button.danger:hover{
 .kpi .hint{
   font-size:12px; color:var(--light); margin-top:6px; line-height:1.4;
 }
-
-/* ============================
-   Tables
-   ============================ */
-table{width:100%; border-collapse:collapse; font-size:13px;}
-th,td{
-  border:1px solid var(--border);
-  padding:10px 12px;
-  vertical-align:top;
-  text-align:left;
-}
-th{
-  background:var(--bg-warm);
-  font-weight:700;
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:0.03em;
-  color:var(--muted);
-}
-td{color:var(--ink);}
-tr:hover td{background:rgba(248,250,252,.6);}
-
-/* ============================
-   Callout boxes
-   ============================ */
+.kpis{display:grid; grid-template-columns: repeat(4,1fr); gap:12px;}
+@media (max-width: 1024px){ .kpis{grid-template-columns: repeat(2,1fr);}
+@media (max-width: 640px){ .kpis{grid-template-columns:1fr;}
 .callout{
   border:1px solid var(--border);
   border-left:3px solid var(--teal);
@@ -321,76 +93,6 @@ tr:hover td{background:rgba(248,250,252,.6);}
   padding:14px 16px;
   background: linear-gradient(135deg, rgba(13,148,136,.02), rgba(37,99,235,.02));
 }
-
-/* ============================
-   Status bars
-   ============================ */
-.okbar{
-  display:none;
-  border:1px solid var(--green-border);
-  background:var(--green-soft);
-  border-radius:var(--radius);
-  padding:12px 16px;
-  margin-top:12px;
-  font-weight:600;
-  font-size:14px;
-  color:var(--green);
-}
-.errbar{
-  display:none;
-  border:1px solid var(--red-border);
-  background:var(--red-soft);
-  border-radius:var(--radius);
-  padding:12px 16px;
-  margin-top:12px;
-  font-weight:600;
-  font-size:14px;
-  color:var(--red);
-}
-
-/* ============================
-   Views
-   ============================ */
-.view{display:none;}
-.view.active{display:block;}
-
-/* ============================
-   Form fields
-   ============================ */
-.row{display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;}
-.field{
-  flex:1 1 300px;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:12px;
-  background:#fff;
-  transition: border-color .15s;
-}
-.field:focus-within{
-  border-color: var(--teal-border);
-}
-.field label{
-  display:flex; justify-content:space-between; gap:10px;
-  font-weight:600; font-size:13px; color:var(--muted);
-  margin-bottom:6px;
-}
-input, select{
-  width:100%; padding:8px 12px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  font-size:14px; color:var(--ink); background:#fff;
-  font-family:inherit;
-  transition: border-color .15s, box-shadow .15s;
-}
-input:focus, select:focus{
-  outline:none;
-  border-color: var(--teal);
-  box-shadow: 0 0 0 3px rgba(13,148,136,.1);
-}
-
-/* ============================
-   Badges
-   ============================ */
 .badge{
   display:inline-block;
   padding:3px 12px;
@@ -403,354 +105,25 @@ input:focus, select:focus{
 .b-strong{border-color:var(--green-border); background:var(--green-soft); color:var(--green);}
 .b-mod{border-color:var(--amber-border); background:var(--amber-soft); color:var(--amber);}
 .b-weak{border-color:var(--red-border); background:var(--red-soft); color:var(--red);}
-
-/* ============================
-   Code / output boxes
-   ============================ */
-.codebox{
-  font-family:var(--mono);
-  font-size:12px;
-  white-space:pre-wrap;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:16px;
-  background:var(--bg-warm);
-  color:var(--ink);
-  line-height:1.6;
-}
-
-/* ============================
-   Layout helpers
-   ============================ */
-.split{display:grid; grid-template-columns: 1fr 1fr; gap:16px;}
-@media (max-width:1024px){ .split{grid-template-columns:1fr;} }
-
-.hr{
-  border:none;
-  border-top:1px solid var(--border);
-  margin:16px 0;
-}
-
-/* ============================
-   Gate indicator
-   ============================ */
-.dot{
-  width:8px; height:8px; border-radius:999px;
-  background: var(--amber);
-  display:inline-block;
-}
-.dot.good{background: var(--green);}
-.dot.bad{background: var(--red);}
-
-/* ============================
-   Section titles (used in views)
-   ============================ */
-.section-title{
-  font-size:16px;
-  font-weight:800;
-  color:var(--navy);
-  margin-bottom:4px;
-  letter-spacing:-0.01em;
-}
-.section-subtitle{
-  font-size:13px;
-  color:var(--muted);
-  margin-bottom:12px;
-  line-height:1.5;
-}
-
-/* ============================
-   Upload area
-   ============================ */
-input[type="file"]{
-  padding:12px;
-  border:2px dashed var(--border-strong);
-  border-radius:var(--radius);
-  background:var(--bg-warm);
-  cursor:pointer;
-  transition: border-color .15s;
-}
-input[type="file"]:hover{
-  border-color: var(--teal-border);
-}
-
-/* ============================
-   Tier label accent (inline)
-   ============================ */
-.tier-label{
-  display:inline-block;
-  font-size:11px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:0.06em;
-  color:var(--teal);
-  margin-bottom:8px;
-}
-
-/* ============================
-   Footer
-   ============================ */
-.footer{
-  text-align:center;
-  padding:24px;
-  font-size:12px;
-  color:var(--light);
-  border-top:1px solid var(--border);
-  margin-top:40px;
-}
-
-/* ============================
-   Print
-   ============================ */
-@media print{
-  header{position:static; box-shadow:none;}
-  .tab-bar, .btnbar, button, .gate{display:none !important;}
-  .card{box-shadow:none; border:1px solid #ddd;}
-  body{background:#fff;}
-}
-
-/* ============================
-   Training Module
-   ============================ */
-.ex-nav-btn{
-  background: var(--bg-warm);
-  border:1px solid var(--border-strong);
-  border-radius:8px;
-  padding:8px 14px;
-  font-size:13px;
-  font-weight:600;
-  color:var(--muted);
-  cursor:pointer;
-  transition: all .15s;
-}
-.ex-nav-btn:hover{ background:#fff; color:var(--ink); }
-.ex-nav-btn.active{
-  background: var(--navy);
-  color: #fff;
-  border-color: var(--navy);
-}
-
-.training-exercise{ display:none; }
-.training-exercise.active{ display:block; }
-
-.ex-header{
-  display:flex;
-  align-items:flex-start;
-  gap:16px;
-  margin-bottom:20px;
-  padding-bottom:16px;
-  border-bottom:1px solid var(--border);
-}
-.ex-number{
-  font-size:42px;
-  font-weight:900;
-  color:var(--border-strong);
-  line-height:1;
-  font-variant-numeric:tabular-nums;
-  flex-shrink:0;
-  letter-spacing:-0.03em;
-}
-.ex-title{ font-size:18px; font-weight:800; color:var(--navy); letter-spacing:-0.01em; }
-.ex-subtitle{ font-size:13px; color:var(--muted); margin-top:2px; }
-
-.ex-section{
-  border-radius:var(--radius);
-  padding:18px 20px;
-  margin-bottom:14px;
-}
-.ex-section p{ margin:0 0 10px; font-size:14px; line-height:1.7; }
-.ex-section p:last-child{ margin-bottom:0; }
-
-.ex-section-label{
-  font-size:12px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:0.06em;
-  color:var(--muted);
-  margin-bottom:10px;
-}
-.ex-context{ background: var(--bg-warm); border:1px solid var(--border); }
-.ex-prediction{ background: rgba(245,158,11,.04); border:1px solid rgba(245,158,11,.2); }
-.ex-reflection{ background: rgba(37,99,235,.03); border:1px solid var(--blue-border); }
-.ex-expert{ background: rgba(13,148,136,.04); border:1px solid var(--teal-border); }
-
-.ex-evidence-box{
-  background: rgba(15,23,42,.04);
-  border-left:3px solid var(--navy);
-  border-radius:6px;
-  padding:12px 14px;
-  margin-top:12px;
-  font-size:13px;
-  font-style:italic;
-  color:var(--ink);
-  line-height:1.6;
-}
-.ex-evidence-label{
-  font-style:normal;
-  font-weight:700;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:0.05em;
-  color:var(--navy);
-  margin-bottom:6px;
-}
-
-.prediction-options{
-  display:grid;
-  gap:8px;
-  margin:12px 0;
-}
-.pred-option{
-  background:#fff;
-  border:1px solid var(--border-strong);
-  border-radius:8px;
-  padding:10px 14px;
-  font-size:14px;
-  cursor:pointer;
-  transition: all .15s;
-  line-height:1.5;
-}
-.pred-option:hover{ background:rgba(245,158,11,.06); border-color:rgba(245,158,11,.4); }
-.pred-option.selected{ background:rgba(245,158,11,.1); border-color:#f59e0b; font-weight:600; }
-.pred-option.correct{ background:var(--green-soft); border-color:var(--green-border); color:var(--green); }
-.pred-option.incorrect{ background:var(--red-soft); border-color:var(--red-border); color:var(--red); opacity:.7; }
-
-.pred-reveal{
-  background: var(--navy);
+.grid{display:grid; gap:16px;}
+.grid-2{grid-template-columns: 360px 1fr;}
+@media (max-width: 1024px){ .grid-2{grid-template-columns:1fr;}
+button.primary{
+  background: var(--teal);
   color:#fff;
-  border-radius:var(--radius);
-  padding:16px 18px;
-  font-size:13px;
-  line-height:1.7;
-  margin-top:10px;
-}
-.pred-correct{
-  font-weight:800;
-  font-size:14px;
-  margin-bottom:10px;
-  color:var(--teal-light);
-}
-.pred-explanation{ color:rgba(255,255,255,.85); }
-
-.reveal-btn{
-  background: #f59e0b;
-  color: #fff;
-  border-color: #f59e0b;
+  border-color: var(--teal);
   font-weight:700;
-  margin-top:8px;
 }
-.reveal-btn:hover{ background:#d97706; border-color:#d97706; color:#fff; }
-
-.expert-content{ font-size:14px; line-height:1.75; color:var(--ink); }
-.expert-content p{ margin:0 0 12px; }
-.expert-content p:last-child{ margin:0; }
-.expert-content strong{ color:var(--navy); }
-.expert-cite{
-  background: var(--teal-soft);
-  border-left:3px solid var(--teal);
-  border-radius:6px;
-  padding:10px 14px;
-  margin-top:12px;
-  font-size:13px;
-  color:var(--muted);
+button.secondary{
+  background: var(--blue-soft);
+  color: var(--blue);
+  border-color: var(--blue-border);
 }
-
-.ex-list{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.8;
-  padding-left:20px;
-  margin:8px 0 12px;
-}
-
-.ref-textarea{
-  width:100%;
-  padding:10px 12px;
-  border:1px solid var(--border-strong);
-  border-radius:8px;
-  font-size:14px;
-  color:var(--ink);
-  font-family:inherit;
-  background:#fff;
-  resize:vertical;
-  margin-top:8px;
-  transition: border-color .15s;
-}
-.ref-textarea:focus{
-  outline:none;
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(37,99,235,.1);
-}
-
-.ex-nav-footer{
-  display:flex;
-  justify-content:flex-end;
-  gap:10px;
-  margin-top:20px;
-  padding-top:16px;
-  border-top:1px solid var(--border);
-}
-
-/* Mayo module styles */
-.mayo-subnav {
-  padding: 7px 14px; border-radius: 8px; font-size: 12px;
-  font-weight: 600; cursor: pointer; border: none;
-  background: rgba(255,255,255,.08); color: rgba(255,255,255,.65);
-  font-family: inherit; transition: background .15s, color .15s;
-  white-space: nowrap;
-}
-.mayo-subnav:hover { background: rgba(255,255,255,.15); color: #fff; }
-.mayo-subnav.active-subnav { background: rgba(255,255,255,.22); color: #fff; font-weight: 700; }
-.mayo-subnav-gold { background: rgba(201,162,39,.22) !important; color: #E8C84A !important; }
-.mayo-subnav-gold:hover, .mayo-subnav-gold.active-subnav { background: rgba(201,162,39,.38) !important; }
 .mayo-input {
   width: 100%; padding: 7px 10px; border: 1px solid var(--border);
   border-radius: 7px; font-size: 15px; font-family: monospace;
   color: var(--navy); background: #fff; outline: none; transition: border-color .18s;
 }
-.mayo-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.10); }
-
-/* ── Shell ── */
-*,*::before,*::after{box-sizing:border-box}
-html,body{margin:0;padding:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;background:#EEF2F7;font-family:'DM Sans',system-ui,sans-serif}
-/* ── Header ── */
-.hdr{flex-shrink:0;background:linear-gradient(140deg,#001533 0%,#003A7A 60%,#0A3566 100%);box-shadow:0 2px 20px rgba(0,0,0,.4)}
-.hdr-top{display:flex;align-items:center;gap:16px;padding:14px 32px 10px}
-.logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#C9A227,#A07810);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#001533;flex-shrink:0}
-.brand{font-size:12px;font-weight:700;color:rgba(255,255,255,.85)}
-.brand span{color:rgba(255,255,255,.4);font-weight:400}
-.tagline{font-size:clamp(14px,1.5vw,18px);font-style:italic;color:rgba(255,255,255,.8);margin:0;line-height:1.2}
-.tagline b{font-style:normal;background:linear-gradient(120deg,#C9A227,#E8C84A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-/* ── Rail ── */
-.rail{display:flex;align-items:stretch;background:rgba(0,0,0,.18);border-top:1px solid rgba(255,255,255,.08);overflow-x:auto;scrollbar-width:none}
-.rail::-webkit-scrollbar{display:none}
-.rb{display:flex;align-items:center;gap:8px;padding:10px 20px 11px;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;font-family:inherit;flex-shrink:0;transition:background .15s}
-.rb:hover{background:rgba(255,255,255,.07)}
-.rb.rb-on{border-bottom-color:#C9A227;background:rgba(201,162,39,.1)}
-.rn{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.35);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
-.rb.rb-on .rn{background:#C9A227;color:#001533}
-.rb.rb-done .rn{background:rgba(201,162,39,.25);color:#C9A227;font-size:0}
-.rb.rb-done .rn::after{content:'✓';font-size:11px}
-.rl{font-size:12px;font-weight:600;color:rgba(255,255,255,.35);white-space:nowrap}
-.rb.rb-on .rl{color:#fff;font-weight:700}
-.rb.rb-done .rl{color:rgba(255,255,255,.55)}
-/* ── Content ── */
-#content{flex:1 1 0;min-height:0;overflow-y:auto;overflow-x:hidden}
-/* ── Panel ── */
-.panel{max-width:1080px;margin:0 auto;padding:24px 28px 0;animation:fin .2s ease}
-@keyframes fin{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-.panel-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 14px rgba(0,21,51,.09)}
-.panel-bar{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#001533,#003A7A);padding:11px 18px}
-.pnum{width:22px;height:22px;border-radius:50%;background:#C9A227;color:#001533;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.picon{font-size:15px}
-.ptitle{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#C9A227}
-.panel-body{padding:20px}
-/* ── Footer ── */
-.c-foot{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 28px 28px}
-.c-bridge{flex:1;min-width:180px;margin:0;font-size:13px;line-height:1.65;color:#4a5568;font-style:italic;padding-left:12px;border-left:3px solid rgba(201,162,39,.55)}
-.c-btn{flex-shrink:0;white-space:nowrap;background:linear-gradient(135deg,#C9A227,#A07810);color:#001533;border:none;border-radius:9px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 3px 14px rgba(201,162,39,.3);transition:transform .1s}
-.c-btn:hover{transform:translateY(-1px)}
-.c-btn-end{background:linear-gradient(135deg,#003A7A,#001533);color:#fff;box-shadow:0 3px 14px rgba(0,21,51,.25)}
 </style>
 </head>
 <body>
@@ -762,13 +135,10 @@ html,body{margin:0;padding:0;height:100vh;overflow:hidden;display:flex;flex-dire
       <p class="tagline">Your CHNA data already makes <b>the case for bank funding.</b></p>
     </div>
   </div>
-  <nav class="rail"><button class="rb" id="rb_chna" onclick="go('chna')"><span class="rn">01</span><span class="rl">CHNA Evidence</span></button><button class="rb" id="rb_linkage" onclick="go('linkage')"><span class="rn">02</span><span class="rl">CHNA → CRA Map</span></button><button class="rb" id="rb_roi" onclick="go('roi')"><span class="rn">03</span><span class="rl">ROI at Scale</span></button><button class="rb" id="rb_cra" onclick="go('cra')"><span class="rn">04</span><span class="rl">CRA Application</span></button><button class="rb" id="rb_banks" onclick="go('banks')"><span class="rn">05</span><span class="rl">Bank Strategy</span></button><button class="rb" id="rb_draft" onclick="go('draft')"><span class="rn">06</span><span class="rl">Generate Docs</span></button></nav>
+  <nav class="rail"><button class="rb" id="rb_chna" onclick="go('chna')" aria-label="CHNA Evidence"><span class="rn">01</span><span class="rl">CHNA Evidence</span></button><button class="rb" id="rb_linkage" onclick="go('linkage')" aria-label="CHNA → CRA Map"><span class="rn">02</span><span class="rl">CHNA → CRA Map</span></button><button class="rb" id="rb_roi" onclick="go('roi')" aria-label="ROI at Scale"><span class="rn">03</span><span class="rl">ROI at Scale</span></button><button class="rb" id="rb_cra" onclick="go('cra')" aria-label="CRA Application"><span class="rn">04</span><span class="rl">CRA Application</span></button><button class="rb" id="rb_banks" onclick="go('banks')" aria-label="Bank Strategy"><span class="rn">05</span><span class="rl">Bank Strategy</span></button><button class="rb" id="rb_draft" onclick="go('draft')" aria-label="Generate Docs"><span class="rn">06</span><span class="rl">Generate Docs</span></button></nav>
 </header>
 <main id="content">
-<section id="s_chna" class="panel" style="display:none">
-  <div class="panel-card">
-    <div class="panel-bar"><span class="pnum">01</span><span class="picon">🏥</span><span class="ptitle">The Community Need</span></div>
-    <div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">2025 Olmsted County CHNA &mdash; Three Priorities, Four Evidence Nodes</div>
+<section id="s_chna" class="panel" style="display:block"><div class="panel-card"><div class="panel-bar"><span class="pnum">01</span><span class="picon">🏥</span><span class="ptitle">The Community Need</span></div><div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">2025 Olmsted County CHNA &mdash; Three Priorities, Four Evidence Nodes</div>
           <p class="small" style="margin-bottom:16px;">Produced collaboratively by Mayo Clinic, Olmsted Medical Center, and Olmsted County Public Health Services. Available at <a href="https://storymaps.arcgis.com/collections/7651105f080c418891d71862b91ed210" target="_blank" style="color:var(--blue);">storymaps.arcgis.com</a>. Click each node to expand the NEMT connection.</p>
           <div class="kpis" style="margin-bottom:18px;">
             <div class="kpi"><div class="label">Priority #1 &mdash; Access to Care</div><div class="value" style="font-size:26px;">34%</div><div class="hint">of adults delayed care (2024 survey, N=937); 15% lack a PCP; top barrier: can&rsquo;t get appointment</div></div>
@@ -830,13 +200,7 @@ html,body{margin:0;padding:0;height:100vh;overflow:hidden;display:flex;flex-dire
             <button class="primary" onclick="mayoNav('linkage')">Map CHNA &rarr; CRA Opportunities &rarr;</button>
             <button class="secondary" onclick="window.open('https://storymaps.arcgis.com/collections/7651105f080c418891d71862b91ed210','_blank')">Open CHNA StoryMap &#8599;</button>
           </div>
-        </div></div>
-  </div>
-  <div class="c-foot"><p class="c-bridge">Mayo's 2025 CHNA documents three priorities directly connected to federal CRA funding. Now see how each one maps to a specific bank-eligible activity.</p><button class="c-btn" onclick="go('linkage')">Continue &rarr;</button></div>
-</section><section id="s_linkage" class="panel" style="display:none">
-  <div class="panel-card">
-    <div class="panel-bar"><span class="pnum">02</span><span class="picon">🔗</span><span class="ptitle">Translating Need to Funding</span></div>
-    <div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">CHNA Priority &rarr; NEMT Program &rarr; CRA Activity Mapping</div>
+        </div></div></div><div class="c-foot"><p class="c-bridge">Mayo's 2025 CHNA documents three priorities directly connected to federal CRA funding. Now see how each one maps to a specific bank-eligible activity.</p><button class="c-btn" onclick="go('linkage')">Continue &rarr;</button></div></section><section id="s_linkage" class="panel" style="display:none"><div class="panel-card"><div class="panel-bar"><span class="pnum">02</span><span class="picon">🔗</span><span class="ptitle">Translating Need to Funding</span></div><div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">CHNA Priority &rarr; NEMT Program &rarr; CRA Activity Mapping</div>
           <p class="small" style="margin-bottom:16px;">Maps each 2025 CHNA priority to program elements, CRA classification, and Schedule H pathway &mdash; the evidence chain you present to banks. Rochester MSA Assessment Area = all of Olmsted County + all of Dodge County (confirmed by OCC examinations).</p>
           <div style="overflow-x:auto;margin-bottom:18px;">
             <table class="tbl" style="min-width:860px;font-size:13px;">
@@ -855,13 +219,7 @@ html,body{margin:0;padding:0;height:100vh;overflow:hidden;display:flex;flex-dire
             <div class="callout" style="border-left:4px solid var(--blue);"><strong style="color:var(--blue);">&#127963; Assessment Area Confirmed</strong><p class="small" style="margin-top:6px;">The Rochester MSA CRA Assessment Area covers <strong>all of Olmsted County and all of Dodge County</strong> (OCC-confirmed). All three CHNA priorities are documented county-wide. A Mayo-anchored NEMT program sits squarely within every Rochester-branch bank&rsquo;s Assessment Area.</p></div>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="secondary" onclick="mayoNav('chna')">&larr; Back to CHNA</button><button class="primary" onclick="mayoNav('roi')">Build Financial Model &rarr;</button></div>
-        </div></div>
-  </div>
-  <div class="c-foot"><p class="c-bridge">The regulatory pathway is confirmed. Now build the full financial model at Mayo's operational scale — four revenue layers, sensitivity analysis, board scenarios.</p><button class="c-btn" onclick="go('roi')">Continue &rarr;</button></div>
-</section><section id="s_roi" class="panel" style="display:none">
-  <div class="panel-card">
-    <div class="panel-bar"><span class="pnum">03</span><span class="picon">💰</span><span class="ptitle">The Financial Case</span></div>
-    <div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">Full ROI Model &mdash; Mayo Clinic / Olmsted County Scale</div>
+        </div></div></div><div class="c-foot"><p class="c-bridge">The regulatory pathway is confirmed. Now build the full financial model at Mayo's operational scale — four revenue layers, sensitivity analysis, board scenarios.</p><button class="c-btn" onclick="go('roi')">Continue &rarr;</button></div></section><section id="s_roi" class="panel" style="display:none"><div class="panel-card"><div class="panel-bar"><span class="pnum">03</span><span class="picon">💰</span><span class="ptitle">The Financial Case</span></div><div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">Full ROI Model &mdash; Mayo Clinic / Olmsted County Scale</div>
           <p class="small" style="margin-bottom:4px;">59,421 Olmsted County patients in 2024 · 42,103 inpatient admissions · 84,800 ER visits · REP longitudinal population data since 1966. Defaults calibrated to Mayo's ambulatory pilot scale. Enable all layers to build the complete value stack.</p>
           <div id="mayo_l0_summary" style="margin-bottom:14px;display:none;background:rgba(201,162,39,.07);border-left:3px solid #C9A227;border-radius:8px;padding:10px 14px;"></div>
 
@@ -1021,13 +379,7 @@ html,body{margin:0;padding:0;height:100vh;overflow:hidden;display:flex;flex-dire
             <button class="primary" onclick="mayoNav('cra')">Build CRA Application &rarr;</button>
             <button onclick="mayoNav('draft')" style="background:linear-gradient(135deg,#7A5C00,#B88A00);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">&#128196; Generate Artifacts &rarr;</button>
           </div>
-        </div></div>
-  </div>
-  <div class="c-foot"><p class="c-bridge">The ROI is compelling. Now convert it into a five-section OCC/FDIC-ready application a bank can put directly into their CRA exam file.</p><button class="c-btn" onclick="go('cra')">Continue &rarr;</button></div>
-</section><section id="s_cra" class="panel" style="display:none">
-  <div class="panel-card">
-    <div class="panel-bar"><span class="pnum">04</span><span class="picon">📋</span><span class="ptitle">The Application</span></div>
-    <div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">CRA Activity Justification Builder &mdash; Five Sections</div>
+        </div></div></div><div class="c-foot"><p class="c-bridge">The ROI is compelling. Now convert it into a five-section OCC/FDIC-ready application a bank can put directly into their CRA exam file.</p><button class="c-btn" onclick="go('cra')">Continue &rarr;</button></div></section><section id="s_cra" class="panel" style="display:none"><div class="panel-card"><div class="panel-bar"><span class="pnum">04</span><span class="picon">📋</span><span class="ptitle">The Application</span></div><div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">CRA Activity Justification Builder &mdash; Five Sections</div>
           <p class="small" style="margin-bottom:16px;">Pre-populated with 2025 Olmsted County CHNA data and Rochester MSA Assessment Area confirmation. Customize each field, then generate the draft document.</p>
           <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px;">
             <div style="background:linear-gradient(135deg,var(--navy),#1a3a5c);padding:11px 16px;display:flex;align-items:center;gap:10px;"><span style="font-size:20px;font-weight:900;color:#E8C84A;min-width:26px;">1</span><div><div style="font-size:13px;font-weight:700;color:#fff;">CHNA Citation &amp; Community Health Need</div><div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:1px;">Required for IRS Schedule H and CRA community development credit</div></div></div>
@@ -1086,13 +438,7 @@ html,body{margin:0;padding:0;height:100vh;overflow:hidden;display:flex;flex-dire
             </div>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="secondary" onclick="mayoNav('roi')">&larr; Back to ROI</button><button class="secondary" onclick="mayoNav('banks')">Identify Banks &rarr;</button><button class="primary" onclick="mayoNav('draft')">Generate Full Draft &rarr;</button></div>
-        </div></div>
-  </div>
-  <div class="c-foot"><p class="c-bridge">The application is ready. Now identify exactly which Rochester MSA banks to approach, in what order, with what framing — based on real exam history.</p><button class="c-btn" onclick="go('banks')">Continue &rarr;</button></div>
-</section><section id="s_banks" class="panel" style="display:none">
-  <div class="panel-card">
-    <div class="panel-bar"><span class="pnum">05</span><span class="picon">🏦</span><span class="ptitle">The Right Partners</span></div>
-    <div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">Bank Engagement &mdash; Rochester MSA Assessment Area</div>
+        </div></div></div><div class="c-foot"><p class="c-bridge">The application is ready. Now identify exactly which Rochester MSA banks to approach, in what order, with what framing — based on real exam history.</p><button class="c-btn" onclick="go('banks')">Continue &rarr;</button></div></section><section id="s_banks" class="panel" style="display:none"><div class="panel-card"><div class="panel-bar"><span class="pnum">05</span><span class="picon">🏦</span><span class="ptitle">The Right Partners</span></div><div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">Bank Engagement &mdash; Rochester MSA Assessment Area</div>
           <p class="small" style="margin-bottom:14px;">The Rochester MSA AA (Olmsted + Dodge counties) includes national, regional, and community banks all subject to CRA. Click each institution for a tailored pitch approach based on CRA exam history.</p>
           <div class="callout" style="border-left:4px solid #C9A227;background:rgba(201,162,39,.06);margin-bottom:16px;"><strong style="color:#7A5C00;">&#127919; Mayo&rsquo;s Strategic Advantage</strong><p class="small" style="margin-top:5px;">Mayo Clinic is the largest employer in Olmsted County. A CRA partnership with Mayo carries reputational value that bank CRA officers actively seek &mdash; it is a marquee exam file relationship. Lead with institutional standing, not dollar amount, then present the complete evidence package.</p></div>
           <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">
@@ -1151,13 +497,7 @@ html,body{margin:0;padding:0;height:100vh;overflow:hidden;display:flex;flex-dire
             </div>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="secondary" onclick="mayoNav('cra')">&larr; Back to Application</button><button class="primary" onclick="mayoNav('draft')">Generate Complete Draft &rarr;</button></div>
-        </div></div>
-  </div>
-  <div class="c-foot"><p class="c-bridge">You know who to call and what to say. Now generate the complete seven-document package — audit-ready and immediately actionable.</p><button class="c-btn" onclick="go('draft')">Continue &rarr;</button></div>
-</section><section id="s_draft" class="panel" style="display:none">
-  <div class="panel-card">
-    <div class="panel-bar"><span class="pnum">06</span><span class="picon">✨</span><span class="ptitle">Your Document Suite</span></div>
-    <div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">&#127775; Generative Artifact Suite &mdash; Mayo Clinic NEMT Program</div>
+        </div></div></div><div class="c-foot"><p class="c-bridge">You know who to call and what to say. Now generate the complete seven-document package — audit-ready and immediately actionable.</p><button class="c-btn" onclick="go('draft')">Continue &rarr;</button></div></section><section id="s_draft" class="panel" style="display:none"><div class="panel-card"><div class="panel-bar"><span class="pnum">06</span><span class="picon">✨</span><span class="ptitle">Your Document Suite</span></div><div class="panel-body"><div class="section-title" style="font-size:17px;margin-bottom:4px;">&#127775; Generative Artifact Suite &mdash; Mayo Clinic NEMT Program</div>
           <p class="small" style="margin-bottom:14px;">Seven high-value artifacts pre-populated with 2025 Olmsted County CHNA data and your ROI model inputs. Each saves 4&ndash;8 hours of preparation. Generate, review, copy, and adapt. All financial figures pull live from the ROI model.</p>
 
           <!-- Artifact button grid -->
@@ -1224,13 +564,9 @@ html,body{margin:0;padding:0;height:100vh;overflow:hidden;display:flex;flex-dire
             <button class="secondary" onclick="mayoNav('roi')">&#128200; Adjust ROI Inputs</button>
             <button class="primary" onclick="mayoNav('chna')">&#8635; Review CHNA Evidence</button>
           </div>
-        </div></div>
-  </div>
-  <div class="c-foot c-foot-end"><p class="c-bridge">You now have everything Mayo needs — a funded, evidence-grounded, bank-partnered NEMT program, documented from need through deployment.</p><button class="c-btn c-btn-end" onclick="go('chna')">&#8635; Review from Start</button></div>
-</section>
+        </div></div></div><div class="c-foot c-foot-end"><p class="c-bridge">You now have everything Mayo needs — a funded, evidence-grounded, bank-partnered NEMT program, documented from need through deployment.</p><button class="c-btn c-btn-end" onclick="go('chna')">&#8635; Review from Start</button></div></section>
 </main>
 <script>
-
 var ORDER=['chna','linkage','roi','cra','banks','draft'];
 function go(t){
   ORDER.forEach(function(id,i){
@@ -1238,26 +574,17 @@ function go(t){
     var b=document.getElementById('rb_'+id);
     if(s) s.style.display=(id===t)?'block':'none';
     if(b){
-      b.className='rb'+(id===t?' rb-on':ORDER.indexOf(t)>i?' rb-done':'');
+      b.className='rb';
+      if(id===t) b.className='rb rb-on';
+      else if(ORDER.indexOf(t)>i) b.className='rb rb-done';
     }
   });
   var c=document.getElementById('content');
   if(c) c.scrollTop=0;
   if(t==='roi'&&typeof calcMayoROI==='function') setTimeout(calcMayoROI,80);
 }
-window.mayoNav=function(p){go(p);}; // internal panel buttons delegate here
-document.addEventListener('DOMContentLoaded',function(){go('chna');});
-
-window._legacyMayoNav = function(panel) {
-  ['chna','linkage','roi','cra','banks','draft'].forEach(p => {
-    const el = document.getElementById('mpanel_' + p);
-    if (el) el.style.display = (p === panel) ? 'block' : 'none';
-  });
-  document.querySelectorAll('.mayo-subnav').forEach(b => b.classList.remove('active-subnav'));
-  const btn = document.getElementById('mn_' + panel);
-  if (btn) btn.classList.add('active-subnav');
-  if (panel === 'roi') { setTimeout(calcMayoROI, 60); }
-};
+window.mayoNav=function(p){go(p);};
+go('chna'); // called directly since script is at bottom of body
 
 window.toggleMEN = function(n) {
   const isOpen = document.getElementById('men'+n+'_body').style.display !== 'none';
