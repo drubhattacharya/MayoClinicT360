@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Aqueduct T360 MATCH — Mayo Clinic NEMT Investment Demo</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<title>Mayo Clinic NEMT — Aqueduct T360 MATCH</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
 /* CHNA–CRA Compliance Navigator — Executive-grade theme */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -711,229 +711,213 @@ input[type="file"]:hover{
 .mayo-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.10); }
 
 
-/* ═══ Mayo White-Glove Demo ═══════════════════════════════════════════════ */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,600;9..40,700&display=swap');
 
+/* ── Reset & Shell ── */
 *, *::before, *::after { box-sizing: border-box; }
-
-html, body {
+html { height: 100%; overflow: hidden; }
+body {
   font-family: 'DM Sans', system-ui, sans-serif;
-  background: #F0F4F8; margin: 0; padding: 0;
+  margin: 0; padding: 0;
   height: 100vh; overflow: hidden;
   display: flex; flex-direction: column;
+  background: #EEF2F7;
 }
 
-/* ── Hero masthead ── */
-.demo-hero {
-  background: linear-gradient(140deg, #001533 0%, #003F87 55%, #0A3566 100%);
-  padding: 20px 36px 0; flex-shrink: 0;
-  overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,.35);
+/* ── Header ── */
+.wg-header {
+  flex-shrink: 0;
+  background: linear-gradient(140deg, #001533 0%, #003A7A 60%, #0A3566 100%);
+  box-shadow: 0 2px 20px rgba(0,0,0,.4);
+  position: relative; overflow: hidden;
 }
-.demo-hero::before {
-  content: ''; position: absolute;
-  top: -100px; right: -60px; width: 380px; height: 380px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,162,39,.2) 0%, transparent 65%);
-  pointer-events: none;
+.wg-header::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(201,162,39,.5) 50%, transparent 100%);
 }
-.demo-hero-inner {
-  display: flex; align-items: center; justify-content: flex-start;
-  gap: 20px; max-width: 1300px; margin: 0 auto;
-  position: relative; padding-bottom: 14px;
+.wg-header-top {
+  display: flex; align-items: center; gap: 20px;
+  padding: 16px 36px 12px;
 }
-.demo-hero-text { flex-shrink: 0; }
-.demo-eyebrow {
-  font-size: 10px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .18em; color: rgba(201,162,39,.8); margin-bottom: 10px;
+.wg-logo {
+  width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+  background: linear-gradient(135deg, #C9A227, #B08010);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 13px; color: #001533;
 }
-.demo-headline {
+.wg-brand-name {
+  font-size: 13px; font-weight: 700; color: rgba(255,255,255,.9);
+  letter-spacing: .01em;
+}
+.wg-brand-sub {
+  font-size: 11px; color: rgba(255,255,255,.4); margin-left: 6px;
+}
+.wg-headline {
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: clamp(16px, 1.8vw, 22px); font-weight: 400; font-style: italic;
-  color: #fff; margin: 0 0 0; line-height: 1.2;
+  font-size: clamp(15px, 1.6vw, 20px);
+  font-style: italic; font-weight: 400;
+  color: rgba(255,255,255,.85); margin: 0; line-height: 1.2;
 }
-.demo-headline strong {
+.wg-headline strong {
   font-style: normal;
-  background: linear-gradient(120deg, #C9A227 0%, #E8C84A 100%);
+  background: linear-gradient(120deg, #C9A227, #E8C84A);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.demo-sub { display: none; }
-.demo-kpi-strip {
-  display: flex; gap: 20px; flex-wrap: wrap; align-items: center;
-  padding: 12px 0 20px;
-}
-.demo-kpi {
-  text-align: center;
-  border-left: 1px solid rgba(255,255,255,.1); padding-left: 20px;
-}
-.demo-kpi:first-child { border-left: none; padding-left: 0; }
-.demo-kpi-val {
-  font-size: 22px; font-weight: 800; font-family: monospace;
-  background: linear-gradient(135deg,#C9A227,#E8C84A);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  line-height: 1;
-}
-.demo-kpi-lbl { font-size: 10px; color: rgba(255,255,255,.45); margin-top: 3px; }
 
-/* ── Progress rail ── */
+/* ── Progress Rail ── */
 .wg-rail {
-  display: flex; align-items: stretch; background: rgba(0,0,0,.2);
-  border-top: 1px solid rgba(255,255,255,.1);
-  overflow-x: auto; scrollbar-width: none; width: 100%;
-
+  display: flex; align-items: stretch;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.2);
+  overflow-x: auto; scrollbar-width: none;
 }
 .wg-rail::-webkit-scrollbar { display: none; }
 .wg-rail-btn {
   display: flex; align-items: center; gap: 8px;
-  padding: 12px 18px 13px; background: none; border: none;
-  border-bottom: 3px solid transparent; cursor: pointer;
-  font-family: inherit; flex-shrink: 0; transition: background .15s;
-  position: relative;
+  padding: 10px 20px 11px; background: none; border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer; font-family: inherit;
+  flex-shrink: 0; transition: background .15s, border-color .15s;
+  white-space: nowrap;
 }
 .wg-rail-btn:hover { background: rgba(255,255,255,.06); }
 .wg-rail-btn.wg-active {
   border-bottom-color: #C9A227;
   background: rgba(201,162,39,.1);
 }
-.wg-rail-btn.wg-done .wg-rail-num {
-  background: rgba(201,162,39,.3); color: #C9A227;
-}
-.wg-rail-btn.wg-done .wg-rail-num::after {
-  content: '✓'; display: block;
-}
-.wg-rail-btn.wg-done .wg-rail-num span { display: none; }
 .wg-rail-num {
   width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(255,255,255,.1); color: rgba(255,255,255,.35);
+  background: rgba(255,255,255,.1); color: rgba(255,255,255,.4);
   font-size: 10px; font-weight: 800;
-  display: flex; align-items: center; justify-content: center; transition: all .2s;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
 }
 .wg-rail-btn.wg-active .wg-rail-num { background: #C9A227; color: #001533; }
-.wg-rail-lbl {
-  font-size: 11.5px; font-weight: 600; color: rgba(255,255,255,.35);
-  white-space: nowrap; transition: color .15s;
+.wg-rail-btn.wg-done .wg-rail-num {
+  background: rgba(201,162,39,.25); color: #C9A227;
+  font-size: 0;
 }
-.wg-rail-btn.wg-active .wg-rail-lbl { color: #fff; }
+.wg-rail-btn.wg-done .wg-rail-num::after { content: '✓'; font-size: 11px; }
+.wg-rail-lbl {
+  font-size: 12px; font-weight: 600;
+  color: rgba(255,255,255,.35);
+  transition: color .15s;
+}
+.wg-rail-btn.wg-active .wg-rail-lbl { color: #fff; font-weight: 700; }
 .wg-rail-btn.wg-done .wg-rail-lbl { color: rgba(255,255,255,.55); }
 
-/* ── Content area ── */
-.demo-body {
-  flex: 1 1 0;
-  overflow-y: auto;
-  background: #F0F4F8;
-  min-height: 0;
-}
-.demo-body-inner {
-  max-width: 1100px; margin: 0 auto; padding: 28px 24px 60px;
+/* ── Content Pane ── */
+#wg-content {
+  flex: 1 1 0; min-height: 0;
+  overflow-y: auto; overflow-x: hidden;
+  background: #EEF2F7;
 }
 
 /* ── Panel ── */
-.wg-panel { }
-
-/* ── Step badge ── */
-.wg-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: linear-gradient(135deg,#001533,#003F87);
-  border-radius: 8px; padding: 5px 14px 5px 6px;
-  margin-bottom: 16px;
+.wg-panel {
+  max-width: 1100px; margin: 0 auto;
+  padding: 28px 32px 0;
+  animation: wg-fade-in .2s ease;
 }
-.wg-badge-num {
-  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+@keyframes wg-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Step label bar ── */
+.wg-panel-inner { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,21,51,.08); margin-bottom: 0; }
+.wg-step-label-bar {
+  display: flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, #001533 0%, #003A7A 100%);
+  padding: 12px 20px;
+}
+.wg-step-num {
+  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
   background: #C9A227; color: #001533;
   font-size: 11px; font-weight: 900;
   display: flex; align-items: center; justify-content: center;
 }
-.wg-badge-icon { font-size: 15px; }
-.wg-badge-label {
-  font-size: 11px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: .09em; color: #C9A227;
+.wg-step-icon { font-size: 16px; }
+.wg-step-heading {
+  font-size: 12px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .1em; color: #C9A227;
+}
+
+/* ── Panel inner content padding ── */
+.wg-panel-inner > *:not(.wg-step-label-bar) {
+  padding-left: 20px; padding-right: 20px;
+}
+.wg-panel-inner > .section-title:first-of-type,
+.wg-panel-inner > div:not(.wg-step-label-bar):first-of-type {
+  padding-top: 16px;
 }
 
 /* ── Continue footer ── */
 .wg-footer {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 16px; flex-wrap: wrap;
-  margin-top: 28px; padding: 18px 22px;
-  background: #FDF8EE;
-  border: 1px solid rgba(201,162,39,.2);
-  border-radius: 10px;
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px 24px 28px;
+  background: transparent;
 }
-.wg-footer-last { background: linear-gradient(135deg,rgba(0,21,51,.04),rgba(0,63,135,.06)); }
-.wg-bridge {
+.wg-footer-final { }
+.wg-bridge-text {
   flex: 1; min-width: 200px; margin: 0;
-  font-size: 13px; color: #4a4a5a; line-height: 1.65;
-  padding-left: 14px; border-left: 3px solid rgba(201,162,39,.5);
+  font-size: 13px; line-height: 1.65; color: #4a5568;
   font-style: italic;
+  padding-left: 14px;
+  border-left: 3px solid rgba(201,162,39,.6);
 }
-.wg-btn {
-  background: linear-gradient(135deg, #C9A227, #B08010);
+.wg-next-btn {
+  flex-shrink: 0; white-space: nowrap;
+  background: linear-gradient(135deg, #C9A227, #A87E0E);
   color: #001533; border: none; border-radius: 9px;
-  padding: 12px 26px; font-size: 14px; font-weight: 700;
-  cursor: pointer; white-space: nowrap; flex-shrink: 0;
-  font-family: inherit; letter-spacing: .01em;
-  box-shadow: 0 3px 12px rgba(201,162,39,.25);
-  transition: box-shadow .15s, transform .1s;
+  padding: 12px 28px; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: inherit;
+  box-shadow: 0 3px 14px rgba(201,162,39,.3);
+  transition: transform .1s, box-shadow .1s;
 }
-.wg-btn:hover { box-shadow: 0 5px 18px rgba(201,162,39,.35); transform: translateY(-1px); }
-.wg-btn-restart {
-  background: linear-gradient(135deg, #003F87, #001533);
-  color: #fff; box-shadow: 0 3px 12px rgba(0,63,135,.2);
+.wg-next-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 18px rgba(201,162,39,.4); }
+.wg-restart-btn {
+  background: linear-gradient(135deg, #003A7A, #001533); color: #fff;
+  box-shadow: 0 3px 14px rgba(0,21,51,.25);
 }
-/* ═══ End Mayo White-Glove CSS ═══ */
 
 </style>
 </head>
 <body>
 
-<!-- ══ Masthead ═══════════════════════════════════════════════════════════ -->
-<div class="demo-hero">
-  <div class="demo-hero-inner">
-    <div class="demo-hero-text">
-      <div class="demo-eyebrow">Aqueduct T360 MATCH &middot; Mayo Clinic &middot; Guided Investment Analysis</div>
-      <h1 class="demo-headline">Your CHNA data already makes <strong>the case for bank funding.</strong></h1>
-      <p class="demo-sub">A six-step walkthrough showing how Mayo Clinic's 2025 Olmsted County CHNA translates into a fully-funded, evidence-grounded NEMT program — with the financial model, CRA application, and bank strategy ready to deploy.</p>
-    </div>
-    
-  </div>
-
-  <!-- Progress rail -->
-  <div class="wg-rail" role="tablist">
-    <button class="wg-rail-btn wg-active" id="rb_chna" onclick="wgGo('chna')">
-        <span class="wg-rail-num">01</span>
-        <span class="wg-rail-lbl">CHNA Evidence</span>
-      </button>
-      <button class="wg-rail-btn" id="rb_linkage" onclick="wgGo('linkage')">
-        <span class="wg-rail-num">02</span>
-        <span class="wg-rail-lbl">CHNA → CRA Map</span>
-      </button>
-      <button class="wg-rail-btn" id="rb_roi" onclick="wgGo('roi')">
-        <span class="wg-rail-num">03</span>
-        <span class="wg-rail-lbl">ROI at Scale</span>
-      </button>
-      <button class="wg-rail-btn" id="rb_cra" onclick="wgGo('cra')">
-        <span class="wg-rail-num">04</span>
-        <span class="wg-rail-lbl">CRA Application</span>
-      </button>
-      <button class="wg-rail-btn" id="rb_banks" onclick="wgGo('banks')">
-        <span class="wg-rail-num">05</span>
-        <span class="wg-rail-lbl">Bank Strategy</span>
-      </button>
-      <button class="wg-rail-btn" id="rb_draft" onclick="wgGo('draft')">
-        <span class="wg-rail-num">06</span>
-        <span class="wg-rail-lbl">Generate Docs</span>
-      </button>
-  </div>
-</div>
-
-<!-- ══ Content ════════════════════════════════════════════════════════════ -->
-<div class="demo-body"><div class="demo-body-inner">
-
-    <div id="panel_chna" class="wg-panel" style="display:block;">
-      <div class="wg-badge">
-        <div class="wg-badge-num">01</div>
-        <div class="wg-badge-icon">🏥</div>
-        <div class="wg-badge-label">The Community Need</div>
+<header class="wg-header">
+  <div class="wg-header-top">
+    <div class="wg-logo">T3</div>
+    <div>
+      <div>
+        <span class="wg-brand-name">Aqueduct T360 MATCH</span>
+        <span class="wg-brand-sub">&middot; Mayo Clinic &middot; NEMT Investment Analysis</span>
       </div>
-      
-          <div class="section-title" style="font-size:17px;margin-bottom:4px;">2025 Olmsted County CHNA &mdash; Three Priorities, Four Evidence Nodes</div>
+      <h1 class="wg-headline">Your CHNA data already makes <strong>the case for bank funding.</strong></h1>
+    </div>
+  </div>
+  <nav class="wg-rail" role="tablist" aria-label="Demo steps">
+    <button class="wg-rail-btn" id="rb_chna" onclick="wgGo('chna')"><span class="wg-rail-num">01</span><span class="wg-rail-lbl">CHNA Evidence</span></button>
+    <button class="wg-rail-btn" id="rb_linkage" onclick="wgGo('linkage')"><span class="wg-rail-num">02</span><span class="wg-rail-lbl">CHNA → CRA Map</span></button>
+    <button class="wg-rail-btn" id="rb_roi" onclick="wgGo('roi')"><span class="wg-rail-num">03</span><span class="wg-rail-lbl">ROI at Scale</span></button>
+    <button class="wg-rail-btn" id="rb_cra" onclick="wgGo('cra')"><span class="wg-rail-num">04</span><span class="wg-rail-lbl">CRA Application</span></button>
+    <button class="wg-rail-btn" id="rb_banks" onclick="wgGo('banks')"><span class="wg-rail-num">05</span><span class="wg-rail-lbl">Bank Strategy</span></button>
+    <button class="wg-rail-btn" id="rb_draft" onclick="wgGo('draft')"><span class="wg-rail-num">06</span><span class="wg-rail-lbl">Generate Docs</span></button>
+  </nav>
+</header>
+
+<main id="wg-content" role="main">
+  <section id="panel_chna" class="wg-panel" style="display:none">
+    <div class="wg-panel-inner">
+      <div class="wg-step-label-bar">
+        <span class="wg-step-num">01</span>
+        <span class="wg-step-icon">🏥</span>
+        <span class="wg-step-heading">The Community Need</span>
+      </div>
+      <div class="section-title" style="font-size:17px;margin-bottom:4px;">2025 Olmsted County CHNA &mdash; Three Priorities, Four Evidence Nodes</div>
           <p class="small" style="margin-bottom:16px;">Produced collaboratively by Mayo Clinic, Olmsted Medical Center, and Olmsted County Public Health Services. Available at <a href="https://storymaps.arcgis.com/collections/7651105f080c418891d71862b91ed210" target="_blank" style="color:var(--blue);">storymaps.arcgis.com</a>. Click each node to expand the NEMT connection.</p>
           <div class="kpis" style="margin-bottom:18px;">
             <div class="kpi"><div class="label">Priority #1 &mdash; Access to Care</div><div class="value" style="font-size:26px;">34%</div><div class="hint">of adults delayed care (2024 survey, N=937); 15% lack a PCP; top barrier: can&rsquo;t get appointment</div></div>
@@ -996,21 +980,21 @@ html, body {
             <button class="secondary" onclick="window.open('https://storymaps.arcgis.com/collections/7651105f080c418891d71862b91ed210','_blank')">Open CHNA StoryMap &#8599;</button>
           </div>
         </div>
-      
-      <div class="wg-footer">
-        <p class="wg-bridge">With the need documented, the next question is: which of these priorities qualifies for bank funding — and exactly which federal regulation makes that possible.</p>
-        <button class="wg-btn" onclick="wgGo('linkage')">Continue &rarr;</button>
-      </div>
     </div>
+    <div class="wg-footer">
+      <p class="wg-bridge-text">The 2025 Olmsted County CHNA documents three priorities that directly connect to federal CRA funding. See how Mayo's data translates into a bankable program.</p>
+      <button class="wg-next-btn" onclick="wgGo('linkage')">Continue &rarr;</button>
+    </div>
+  </section>
 
-    <div id="panel_linkage" class="wg-panel" style="display:none;">
-      <div class="wg-badge">
-        <div class="wg-badge-num">02</div>
-        <div class="wg-badge-icon">🔗</div>
-        <div class="wg-badge-label">Translating Need to Funding</div>
+  <section id="panel_linkage" class="wg-panel" style="display:none">
+    <div class="wg-panel-inner">
+      <div class="wg-step-label-bar">
+        <span class="wg-step-num">02</span>
+        <span class="wg-step-icon">🔗</span>
+        <span class="wg-step-heading">From Need to Funding</span>
       </div>
-      
-          <div class="section-title" style="font-size:17px;margin-bottom:4px;">CHNA Priority &rarr; NEMT Program &rarr; CRA Activity Mapping</div>
+      <div class="section-title" style="font-size:17px;margin-bottom:4px;">CHNA Priority &rarr; NEMT Program &rarr; CRA Activity Mapping</div>
           <p class="small" style="margin-bottom:16px;">Maps each 2025 CHNA priority to program elements, CRA classification, and Schedule H pathway &mdash; the evidence chain you present to banks. Rochester MSA Assessment Area = all of Olmsted County + all of Dodge County (confirmed by OCC examinations).</p>
           <div style="overflow-x:auto;margin-bottom:18px;">
             <table class="tbl" style="min-width:860px;font-size:13px;">
@@ -1030,21 +1014,21 @@ html, body {
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="secondary" onclick="mayoNav('chna')">&larr; Back to CHNA</button><button class="primary" onclick="mayoNav('roi')">Build Financial Model &rarr;</button></div>
         </div>
-      
-      <div class="wg-footer">
-        <p class="wg-bridge">The regulatory pathway is clear. Now see what it's worth — a full financial model built at Mayo's actual operational scale, with four revenue layers and board-ready scenario framing.</p>
-        <button class="wg-btn" onclick="wgGo('roi')">Continue &rarr;</button>
-      </div>
     </div>
+    <div class="wg-footer">
+      <p class="wg-bridge-text">Each CHNA priority maps to a specific CRA classification under 12 CFR 25.04(c)(3). Now build the financial model at Mayo's operational scale.</p>
+      <button class="wg-next-btn" onclick="wgGo('roi')">Continue &rarr;</button>
+    </div>
+  </section>
 
-    <div id="panel_roi" class="wg-panel" style="display:none;">
-      <div class="wg-badge">
-        <div class="wg-badge-num">03</div>
-        <div class="wg-badge-icon">💰</div>
-        <div class="wg-badge-label">The Financial Case</div>
+  <section id="panel_roi" class="wg-panel" style="display:none">
+    <div class="wg-panel-inner">
+      <div class="wg-step-label-bar">
+        <span class="wg-step-num">03</span>
+        <span class="wg-step-icon">💰</span>
+        <span class="wg-step-heading">The Financial Case</span>
       </div>
-      
-          <div class="section-title" style="font-size:17px;margin-bottom:4px;">Full ROI Model &mdash; Mayo Clinic / Olmsted County Scale</div>
+      <div class="section-title" style="font-size:17px;margin-bottom:4px;">Full ROI Model &mdash; Mayo Clinic / Olmsted County Scale</div>
           <p class="small" style="margin-bottom:4px;">59,421 Olmsted County patients in 2024 · 42,103 inpatient admissions · 84,800 ER visits · REP longitudinal population data since 1966. Defaults calibrated to Mayo's ambulatory pilot scale. Enable all layers to build the complete value stack.</p>
           <div id="mayo_l0_summary" style="margin-bottom:14px;display:none;background:rgba(201,162,39,.07);border-left:3px solid #C9A227;border-radius:8px;padding:10px 14px;"></div>
 
@@ -1205,21 +1189,21 @@ html, body {
             <button onclick="mayoNav('draft')" style="background:linear-gradient(135deg,#7A5C00,#B88A00);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">&#128196; Generate Artifacts &rarr;</button>
           </div>
         </div>
-      
-      <div class="wg-footer">
-        <p class="wg-bridge">The numbers are compelling. Now convert them into a five-section application that a bank's CRA officer can put directly into their exam file.</p>
-        <button class="wg-btn" onclick="wgGo('cra')">Continue &rarr;</button>
-      </div>
     </div>
+    <div class="wg-footer">
+      <p class="wg-bridge-text">Four revenue layers, sensitivity analysis, and board-ready scenario framing. Now convert this into a bank-ready five-section application.</p>
+      <button class="wg-next-btn" onclick="wgGo('cra')">Continue &rarr;</button>
+    </div>
+  </section>
 
-    <div id="panel_cra" class="wg-panel" style="display:none;">
-      <div class="wg-badge">
-        <div class="wg-badge-num">04</div>
-        <div class="wg-badge-icon">📋</div>
-        <div class="wg-badge-label">The Application</div>
+  <section id="panel_cra" class="wg-panel" style="display:none">
+    <div class="wg-panel-inner">
+      <div class="wg-step-label-bar">
+        <span class="wg-step-num">04</span>
+        <span class="wg-step-icon">📋</span>
+        <span class="wg-step-heading">The Application</span>
       </div>
-      
-          <div class="section-title" style="font-size:17px;margin-bottom:4px;">CRA Activity Justification Builder &mdash; Five Sections</div>
+      <div class="section-title" style="font-size:17px;margin-bottom:4px;">CRA Activity Justification Builder &mdash; Five Sections</div>
           <p class="small" style="margin-bottom:16px;">Pre-populated with 2025 Olmsted County CHNA data and Rochester MSA Assessment Area confirmation. Customize each field, then generate the draft document.</p>
           <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px;">
             <div style="background:linear-gradient(135deg,var(--navy),#1a3a5c);padding:11px 16px;display:flex;align-items:center;gap:10px;"><span style="font-size:20px;font-weight:900;color:#E8C84A;min-width:26px;">1</span><div><div style="font-size:13px;font-weight:700;color:#fff;">CHNA Citation &amp; Community Health Need</div><div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:1px;">Required for IRS Schedule H and CRA community development credit</div></div></div>
@@ -1279,21 +1263,21 @@ html, body {
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="secondary" onclick="mayoNav('roi')">&larr; Back to ROI</button><button class="secondary" onclick="mayoNav('banks')">Identify Banks &rarr;</button><button class="primary" onclick="mayoNav('draft')">Generate Full Draft &rarr;</button></div>
         </div>
-      
-      <div class="wg-footer">
-        <p class="wg-bridge">You have the application. Now see which specific Rochester MSA banks to approach, in what order, and what to say — based on their actual CRA exam ratings and assessment area exposure.</p>
-        <button class="wg-btn" onclick="wgGo('banks')">Continue &rarr;</button>
-      </div>
     </div>
+    <div class="wg-footer">
+      <p class="wg-bridge-text">A complete OCC/FDIC-ready justification memo, pre-populated from the CHNA data. Now identify exactly which banks to approach — and how.</p>
+      <button class="wg-next-btn" onclick="wgGo('banks')">Continue &rarr;</button>
+    </div>
+  </section>
 
-    <div id="panel_banks" class="wg-panel" style="display:none;">
-      <div class="wg-badge">
-        <div class="wg-badge-num">05</div>
-        <div class="wg-badge-icon">🏦</div>
-        <div class="wg-badge-label">The Right Partners</div>
+  <section id="panel_banks" class="wg-panel" style="display:none">
+    <div class="wg-panel-inner">
+      <div class="wg-step-label-bar">
+        <span class="wg-step-num">05</span>
+        <span class="wg-step-icon">🏦</span>
+        <span class="wg-step-heading">The Right Partners</span>
       </div>
-      
-          <div class="section-title" style="font-size:17px;margin-bottom:4px;">Bank Engagement &mdash; Rochester MSA Assessment Area</div>
+      <div class="section-title" style="font-size:17px;margin-bottom:4px;">Bank Engagement &mdash; Rochester MSA Assessment Area</div>
           <p class="small" style="margin-bottom:14px;">The Rochester MSA AA (Olmsted + Dodge counties) includes national, regional, and community banks all subject to CRA. Click each institution for a tailored pitch approach based on CRA exam history.</p>
           <div class="callout" style="border-left:4px solid #C9A227;background:rgba(201,162,39,.06);margin-bottom:16px;"><strong style="color:#7A5C00;">&#127919; Mayo&rsquo;s Strategic Advantage</strong><p class="small" style="margin-top:5px;">Mayo Clinic is the largest employer in Olmsted County. A CRA partnership with Mayo carries reputational value that bank CRA officers actively seek &mdash; it is a marquee exam file relationship. Lead with institutional standing, not dollar amount, then present the complete evidence package.</p></div>
           <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">
@@ -1353,21 +1337,21 @@ html, body {
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="secondary" onclick="mayoNav('cra')">&larr; Back to Application</button><button class="primary" onclick="mayoNav('draft')">Generate Complete Draft &rarr;</button></div>
         </div>
-      
-      <div class="wg-footer">
-        <p class="wg-bridge">You know who to call and what to say. Now generate the complete document package — seven audit-ready artifacts that make this immediately actionable.</p>
-        <button class="wg-btn" onclick="wgGo('draft')">Continue &rarr;</button>
-      </div>
     </div>
+    <div class="wg-footer">
+      <p class="wg-bridge-text">Seven Rochester MSA banks with CRA obligations, each with a tailored pitch strategy. Now generate the complete document package.</p>
+      <button class="wg-next-btn" onclick="wgGo('draft')">Continue &rarr;</button>
+    </div>
+  </section>
 
-    <div id="panel_draft" class="wg-panel" style="display:none;">
-      <div class="wg-badge">
-        <div class="wg-badge-num">06</div>
-        <div class="wg-badge-icon">✨</div>
-        <div class="wg-badge-label">Your Document Suite</div>
+  <section id="panel_draft" class="wg-panel" style="display:none">
+    <div class="wg-panel-inner">
+      <div class="wg-step-label-bar">
+        <span class="wg-step-num">06</span>
+        <span class="wg-step-icon">✨</span>
+        <span class="wg-step-heading">Your Document Suite</span>
       </div>
-      
-          <div class="section-title" style="font-size:17px;margin-bottom:4px;">&#127775; Generative Artifact Suite &mdash; Mayo Clinic NEMT Program</div>
+      <div class="section-title" style="font-size:17px;margin-bottom:4px;">&#127775; Generative Artifact Suite &mdash; Mayo Clinic NEMT Program</div>
           <p class="small" style="margin-bottom:14px;">Seven high-value artifacts pre-populated with 2025 Olmsted County CHNA data and your ROI model inputs. Each saves 4&ndash;8 hours of preparation. Generate, review, copy, and adapt. All financial figures pull live from the ROI model.</p>
 
           <!-- Artifact button grid -->
@@ -1435,19 +1419,13 @@ html, body {
             <button class="primary" onclick="mayoNav('chna')">&#8635; Review CHNA Evidence</button>
           </div>
         </div>
-
-      
-      
-      <div class="wg-footer wg-footer-last">
-        <p class="wg-bridge">You now have everything Mayo needs to launch a fully-funded, evidence-grounded, bank-partnered NEMT program — documented, modeled, and drafted.</p>
-        <button class="wg-btn wg-btn-restart" onclick="wgGo('chna')">&#8635; Review from Start</button>
-      </div>
     </div>
-</div></div>
-
-<div style="flex-shrink:0;text-align:center;padding:10px;background:rgba(240,244,248,.9);font-size:11px;color:#94a3b8;">
-  All processing occurs locally in your browser. No data leaves your device.
-</div>
+    <div class="wg-footer wg-footer-final">
+      <p class="wg-bridge-text">You now have everything Mayo needs — a funded, evidence-grounded NEMT program, documented from need through bank partnership.</p>
+      <button class="wg-next-btn wg-restart-btn" onclick="wgGo('chna')">&#8635; Review from Start</button>
+    </div>
+  </section>
+</main>
 
 <script>
 // ------------------------------
@@ -1914,13 +1892,13 @@ function strengthBadge(str){
 function renderTransportSpotlight(){
   const o = state.transport.overall;
   const a = state.transport.age6574;
-  (document.getElementById('t_overall')||{})['textContent'] = (o==null) ? "—" : fmtPct(o);
-  (document.getElementById('t_6574')||{})['textContent'] = (a==null) ? "—" : fmtPct(a);
+  document.getElementById("t_overall").textContent = (o==null) ? "—" : fmtPct(o);
+  document.getElementById("t_6574").textContent = (a==null) ? "—" : fmtPct(a);
   if(o!=null && a!=null && o>0){
     const amp = a/o;
-    (document.getElementById('t_amp')||{})['textContent'] = `${amp.toFixed(1)}×`;
+    document.getElementById("t_amp").textContent = `${amp.toFixed(1)}×`;
   }else{
-    (document.getElementById('t_amp')||{})['textContent'] = "—";
+    document.getElementById("t_amp").textContent = "—";
   }
 }
 
@@ -2312,7 +2290,7 @@ function setView(view){
     try{ if(window.__beChart) window.__beChart.resize(); }catch(e){}
   }, 60);
 }
-/* tabbtn wiring skipped — Mayo demo uses wgGo navigation */
+/* tabbtn skipped */
 
 // ------------------------------
 // Buttons
@@ -2466,9 +2444,9 @@ if(covEl && covRead){
 
 // Initial render placeholders
 renderTransportSpotlight();
-{const _e=document.getElementById("tbl_materiality"); if(_e) _e.innerHTML="<tr><th>Disparity</th><th>Segment</th><th>Magnitude</th><th>Δ Concentration</th><th>Prominence</th><th>Score</th><th>Recommendation</th><th>Evidence</th></tr><tr><td colspan='8'>Upload documents and click Process Files.</td></tr>";}
-{const _e=document.getElementById("tbl_evidence"); if(_e) _e.innerHTML="<tr><th>Disparity</th><th>Snippet</th><th>Doc</th><th>Page</th></tr><tr><td colspan='4'>—</td></tr>";}
-{const _e=document.getElementById("tbl_cra"); if(_e) _e.innerHTML="<tr><th>Opportunity</th><th>CRA test mapping</th><th>Criterion satisfied</th><th>Strength</th><th>Score</th><th>Scope guidance</th><th>Application packet checklist</th></tr><tr><td colspan='7'>—</td></tr>";}
+{const _e=document.getElementById("tbl_materiality"); if(_e) _e.innerHTML = "<tr><th>Disparity</th><th>Segment</th><th>Magnitude</th><th>Δ Concentration</th><th>Prominence</th><th>Score</th><th>Recommendation</th><th>Evidence</th></tr><tr><td colspan='8'>Upload documents and click Process Files.</td></tr>";}
+{const _e=document.getElementById("tbl_evidence"); if(_e) _e.innerHTML = "<tr><th>Disparity</th><th>Snippet</th><th>Doc</th><th>Page</th></tr><tr><td colspan='4'>—</td></tr>";}
+{const _e=document.getElementById("tbl_cra"); if(_e) _e.innerHTML = "<tr><th>Opportunity</th><th>CRA test mapping</th><th>Criterion satisfied</th><th>Strength</th><th>Score</th><th>Scope guidance</th><th>Application packet checklist</th></tr><tr><td colspan='7'>—</td></tr>";}
 if(document.getElementById("tbl_chna_gaps")) document.getElementById("tbl_chna_gaps").innerHTML = "<tr><th>Document</th><th>CHNA score</th><th>IS score</th><th>Written comments</th><th>Public availability</th><th>Top gaps (auto)</th><th>Evidence</th></tr><tr><td colspan=\"7\">—</td></tr>";
 if(document.getElementById("chna_gap_recs")) document.getElementById("chna_gap_recs").textContent = "Upload CHNA/IS documents and click Process Files.";
 
@@ -3498,8 +3476,14 @@ window.toggleReveal = function(id){
 // ═══════════════════════════════════════════════════════════
 
 window.mayoNav = function(panel) {
-  // Delegate to wgGo — all navigation unified through one function
-  if (typeof wgGo === 'function') wgGo(panel);
+  ['chna','linkage','roi','cra','banks','draft'].forEach(p => {
+    const el = document.getElementById('mpanel_' + p);
+    if (el) el.style.display = (p === panel) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.mayo-subnav').forEach(b => b.classList.remove('active-subnav'));
+  const btn = document.getElementById('mn_' + panel);
+  if (btn) btn.classList.add('active-subnav');
+  if (panel === 'roi') { setTimeout(calcMayoROI, 60); }
 };
 
 window.toggleMEN = function(n) {
@@ -4341,42 +4325,40 @@ window.downloadMayoDraft = function() {
 
 
 
-/* ── Mayo White-Glove Navigation ── */
-var _wgOrder = ['chna','linkage','roi','cra','banks','draft'];
+var _WG_ORDER = ['chna','linkage','roi','cra','banks','draft'];
 
 window.wgGo = function(target) {
-  var ti = _wgOrder.indexOf(target);
+  var ti = _WG_ORDER.indexOf(target);
+  if (ti === -1) return;
 
-  // Update panels
-  _wgOrder.forEach(function(pid) {
-    var panel = document.getElementById('panel_' + pid);
-    if (panel) panel.style.display = (pid === target) ? 'block' : 'none';
+  // Show only the target panel, hide all others
+  _WG_ORDER.forEach(function(pid) {
+    var el = document.getElementById('panel_' + pid);
+    if (el) el.style.display = (pid === target) ? 'block' : 'none';
   });
 
-  // Update rail buttons
-  _wgOrder.forEach(function(pid, i) {
+  // Update rail state
+  _WG_ORDER.forEach(function(pid, i) {
     var btn = document.getElementById('rb_' + pid);
     if (!btn) return;
     btn.classList.remove('wg-active', 'wg-done');
-    if (pid === target) btn.classList.add('wg-active');
-    else if (i < ti) btn.classList.add('wg-done');
+    if (i < ti)        btn.classList.add('wg-done');
+    else if (pid === target) btn.classList.add('wg-active');
   });
 
-  // Trigger ROI calc when landing on ROI panel
-  if (target === 'roi' && typeof calcMayoROI === 'function') {
-    setTimeout(calcMayoROI, 80);
-  }
-  // Scroll the content area (not the page) to top on panel switch
-  var body = document.querySelector('.demo-body');
-  if (body) body.scrollTop = 0;
+  // Scroll the content pane to top
+  var pane = document.getElementById('wg-content');
+  if (pane) pane.scrollTop = 0;
+
+  // ROI calc on arrival
+  if (target === 'roi') setTimeout(function(){ if(typeof calcMayoROI==='function') calcMayoROI(); }, 80);
 };
 
+// mayoNav in original panels calls this — delegate to wgGo
+window.mayoNav = function(p) { wgGo(p); };
 
-
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-  wgGo('chna');
-});
+// Start on CHNA
+document.addEventListener('DOMContentLoaded', function() { wgGo('chna'); });
 
 </script>
 </body>
