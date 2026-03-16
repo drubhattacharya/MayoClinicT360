@@ -2308,16 +2308,14 @@ function setView(view){
     try{ if(window.__beChart) window.__beChart.resize(); }catch(e){}
   }, 60);
 }
-document.querySelectorAll(".tabbtn").forEach(btn=>{
-  btn.addEventListener("click", ()=> setView(btn.dataset.view));
-});
+/* tabbtn wiring skipped — Mayo demo uses wgGo navigation */
 
 // ------------------------------
 // Buttons
 // ------------------------------
-document.getElementById("btn_export").addEventListener("click", exportReport);
+const _be=document.getElementById("btn_export"); if(_be) _be.addEventListener("click", exportReport);
 
-document.getElementById("btn_reset").addEventListener("click", ()=>{
+const _br=document.getElementById("btn_reset"); if(_br) _br.addEventListener("click", ()=>{
   clearErr();
   state.docs=[]; state.evidence=[]; state.findings=[]; state.opportunities=[]; state.selectedOpp=null; state.chnaEval=[];
   state.transport={overall:null, age6574:null};
@@ -2337,7 +2335,7 @@ document.getElementById("btn_reset").addEventListener("click", ()=>{
   showOk("Reset complete.");
 });
 
-document.getElementById("btn_demo").addEventListener("click", ()=>{
+const _bd=document.getElementById("btn_demo"); if(_bd) _bd.addEventListener("click", ()=>{
   clearErr();
   // Demo based on your exact framing: 2.7% overall, 8.5% age 65-74
   const demoText =
@@ -2365,7 +2363,7 @@ document.getElementById("btn_demo").addEventListener("click", ()=>{
   showOk("Demo loaded (transportation differential).");
 });
 
-document.getElementById("btn_process").addEventListener("click", async ()=>{
+const _bp=document.getElementById("btn_process"); if(_bp) _bp.addEventListener("click", async ()=>{
   clearErr();
   showOk("Processing… (parsing documents and updating Tier 1–3 outputs)");
   try{
@@ -2431,7 +2429,7 @@ document.getElementById("btn_process").addEventListener("click", async ()=>{
   }
 });
 
-document.getElementById("btn_use_top").addEventListener("click", ()=>{
+const _bu=document.getElementById("btn_use_top"); if(_bu) _bu.addEventListener("click", ()=>{
   if(!state.opportunities.length){
     showErr("No Tier 2 opportunities available yet.");
     return;
